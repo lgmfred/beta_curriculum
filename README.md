@@ -8,13 +8,17 @@ Contact Brooklin (brooklin.myers@dockyard.com) or DM at [@BrooklinJMyers](https:
 
 ## Want To Get Involved?
 
-Contributors and beta testers are welcome to go through the course, raise issues, and make PRs. See the [Contributor Guide](https://github.com/DockYard-Academy/beta_curriculum/wiki/Beta-Tester-Guide-&-Contributor-Setup).
+Contributors and beta testers are welcome to go through the course, raise issues, and make PRs. See the [Contributor Guide](https://github.com/DockYard-Academy/beta_curriculum/blob/main/CONTRIBUTING.md).
 
 See our list of [Open Issues](https://github.com/DockYard-Academy/beta_curriculum/issues). You can raise an issue to get support.
 
 ## QuickStart
 
-The recommended installation methods for this course are from the Elixir language [website](https://elixir-lang.org/install.html#gnulinux). If you cannot see [mermaid.js](https://github.com/mermaid-js/mermaid) graphs, please ensure your Livebook version is correct. In the future when working with multiple Elixir projects, there is a tool called [`asdf`](https://github.com/asdf-vm/asdf) that can be used to install different versions of Erlang/Elixir as defined by the [.tool-versions](https://github.com/DockYard-Academy/beta_curriculum/blob/main/.tool-versions) file in a project.
+The following QuickStart Guide will let you quickly try the course. For a long-term setup, follow our [Student Setup Guide](https://github.com/DockYard-Academy/beta_curriculum/wiki/Student-Setup-Guide).
+
+The recommended installation methods for this course are from the Elixir language [website](https://elixir-lang.org/install.html#gnulinux). If you cannot see [mermaid.js](https://github.com/mermaid-js/mermaid) graphs, please ensure your Livebook version is correct. 
+
+In the future when working with multiple Elixir projects, there is a tool called [`asdf`](https://github.com/asdf-vm/asdf) that can be used to install different versions of Erlang/Elixir as defined by the [.tool-versions](https://github.com/DockYard-Academy/beta_curriculum/blob/main/.tool-versions) file in a project.
 
 ### MacOS
 
@@ -187,10 +191,8 @@ Control Flow and Abstraction
 Modules and Structs
 Enumeration 1
 Enumeration 2
-
-## Week 2: Built-In Tools
-
-1. Built-In Modules
+Built-in Modules
+Reduce
 2. Dates and Time
 3. Guards, Pattern Matching
 4. String Manipulation
