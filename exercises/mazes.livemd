@@ -79,6 +79,8 @@ maze = %{
     }
   }
 }
+
+maze.south.west.south.east.south.east.south
 ```
 
 ## The String Maze
@@ -140,6 +142,8 @@ maze = %{
     }
   }
 }
+
+maze["south"]["east"]["south"]["west"]["south"]["west"]["south"]["east"]["south"]
 ```
 
 ## Bonus: Treasure Map
@@ -185,6 +189,8 @@ treasure_map = %{
     }
   }
 }
+
+treasure_map["south ten paces"][10][:"east three paces"][[1, 2, 3]][{"turn", "right"}].dig
 ```
 
 ### (Extra Bonus) Update the Treasure Map
@@ -255,6 +261,10 @@ treasure_map = %{
     }
   }
 }
+
+path = ["south ten paces", 10, :"east three paces", [1, 2, 3], {"turn", "right"}, :dig]
+
+Kernel.put_in(treasure_map, path, "taken")
 ```
 
 ## Bonus: Pattern Matching
@@ -289,7 +299,7 @@ Generate a maze using the [Online Maze Generator](https://www.mazegenerator.net/
 at least a 5 * 5 in width and height.
 
 * Create a deeply nested map to represent your `custom_maze`. It should have an `"Exit!"` value at the end.
-* Have a partner navigate your maze using either **map[key]** notationor **map.key** notation to retrieve the `"Exit!"` value.
+* Have a partner navigate your maze using either **map[key]** notation or **map.key** notation to retrieve the `"Exit!"` value.
 
 Enter your solution below.
 
