@@ -81,7 +81,7 @@ weather --> foggy --> r4[something bright]
 
 ```elixir
 # Change :sunny to :snowing, :raining, and :foggy to see a different result.
-weather = :sunny
+weather = :foggy
 
 recommendation = "t-shirt"
 recommendation = if weather == :snowing, do: "thick coat", else: recommendation
@@ -113,7 +113,8 @@ end
 Enter your solution below.
 
 ```elixir
-
+temperature = 20
+if temperature > 10, do: :hot, else: :cold
 ```
 
 ## Clear Control Flow
@@ -258,7 +259,7 @@ We can provide any number of cases. Cases use pattern matching to decide which r
 Return each value from `1` to `5` by changing the `condition` variable below.
 
 ```elixir
-condition = nil
+condition = [1, 2, 3]
 
 case condition do
   :red -> 1
@@ -358,7 +359,7 @@ end
 Return each result from `1` to `5` by changing the `condition` variable below.
 
 ```elixir
-condition = nil
+condition = "{1, 6, %{key: [1, 2, 9]}}"
 
 case condition do
   [1, 2, 3] -> 1
@@ -399,7 +400,7 @@ Here's how we can translate this into a program using `cond`.
 
 ```elixir
 # Change temperature to change the condition triggered.
-temperature = 6
+temperature = 17
 
 cond do
   temperature >= 21 -> "t-shirt"
@@ -497,7 +498,14 @@ end
 </details>
 
 ```elixir
+grade = 5
 
+cond do
+  grade >= 85 and grade <= 100 -> "A"
+  grade >= 70 and grade <= 84 -> "B"
+  grade >= 55 and grade <= 69 -> "C"
+  grade >= 1 and grade <= 54 -> "D"
+end
 ```
 
 ## Unless
@@ -551,7 +559,11 @@ In the Elixir cell below
 * Create an `unless` statement. which returns `"awake"` unless `tired`.
 
 ```elixir
+tired = false
 
+unless tired do
+  "awake"
+end
 ```
 
 ## Commit Your Progress
