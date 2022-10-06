@@ -61,6 +61,8 @@ defmodule Character do
 
   Defines a character struct, and functions for creating character dialogue.
   """
+  @enforce_keys [:name]
+  defstruct @enforce_keys ++ [:class, :weapon]
 
   @doc """
   Introduce the character by name.
@@ -74,6 +76,7 @@ defmodule Character do
      "My name is Aragorn."
   """
   def introduce(character) do
+    "My name is #{character.name}."
   end
 
   @doc """
@@ -87,7 +90,12 @@ defmodule Character do
     iex> Character.attack(%Character{name: "Aragorn", weapon: "sword"})
     "I attack with my sword!"
   """
+  def attack(%Character{weapon: nil}) do
+    "I attack!"
+  end
+
   def attack(character) do
+    "I attack with my #{character.weapon}!"
   end
 
   @doc """
@@ -101,7 +109,12 @@ defmodule Character do
     iex> Character.class(%Character{name: "Aragorn", class: "ranger"})
     "I am a ranger."
   """
+  def class(%Character{class: nil}) do
+    "I've no class."
+  end
+
   def class(character) do
+    "I am a #{character.class}."
   end
 
   @doc """
@@ -116,6 +129,7 @@ defmodule Character do
     "My name is Aragorn and I am a ranger!"
   """
   def war_cry(character) do
+    "My name is #{character.name} and I am a #{character.class}!"
   end
 
   @doc """
@@ -130,6 +144,7 @@ defmodule Character do
     "My name is Aragorn and I have defeated the warrior Gimli!"
   """
   def defeat(character1, character2) do
+    "My name is #{character1.name} and I have defeated the #{character2.class} #{character2.name}!"
   end
 end
 ```
@@ -176,7 +191,13 @@ Character.introduce(aragorn)
 Enter your solution below.
 
 ```elixir
+aragorn = %Character{name: "Argon", class: "ranger", weapon: "sword"}
+gandalf = %Character{name: "Gandalf", class: "wizard", weapon: "staff"}
+gimli = %Character{name: "Gimli", class: "warrior", weapon: "axe"}
 
+Character.introduce(aragorn)
+Character.attack(%Character{name: "Gimli"})
+Character.class(%Character{name: "Gimli", weapon: "axe", class: "Yak"})
 ```
 
 ### Bonus: Handle `nil` Fields.
