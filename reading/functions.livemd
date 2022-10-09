@@ -267,7 +267,7 @@ is_even?.(1) # false
 ```
 
 <details style="background-color: lightgreen; padding: 1rem; margin: 1rem 0;">
-<summary>Hint</summary>
+<summary>Example solution</summary>
 
 ```elixir
 is_even? = fn int -> rem(int, 2) == 0 end 
@@ -334,7 +334,7 @@ calculate_force.(2, 4) # 8
 ```
 
 <details style="background-color: lightgreen; padding: 1rem; margin: 1rem 0;">
-<summary>Hint</summary>
+<summary>Example solution</summary>
 
 ```elixir
 calculate_force = fn mass, acceleration -> mass * acceleration end
@@ -385,7 +385,7 @@ subtract.(20, 25) # -5
 ```
 
 <details style="background-color: lightgreen; padding: 1rem; margin: 1rem 0;">
-<summary>Hint</summary>
+<summary>Example solution</summary>
 
 ```elixir
 subtract = &(&1 - &2)
@@ -413,7 +413,7 @@ multiply_three.(2, 5, 3) # 30
 ```
 
 <details style="background-color: lightgreen; padding: 1rem; margin: 1rem 0;">
-<summary>Hint</summary>
+<summary>Example solution</summary>
 
 ```elixir
 multiply_three = &(&1 * &2 * &3)
@@ -503,7 +503,7 @@ call_with_10_and_20.(add) # 30
 ```
 
 <details style="background-color: lightgreen; padding: 1rem; margin: 1rem 0;">
-<summary>Hint</summary>
+<summary>Example solution</summary>
 
 ```elixir
 call_with_10_and_20 = fn callback -> callback.(10, 20) end
@@ -611,7 +611,7 @@ Use these functions with the pipe operator <span style="background-color: rgb(22
 4. subtract by `4`.
 
 <details style="background-color: lightgreen; padding: 1rem; margin: 1rem 0;">
-<summary>Hint</summary>
+<summary>Example solution</summary>
 
 ```elixir
 add = fn int1, int2 -> int1 + int2 end
