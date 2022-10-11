@@ -80,6 +80,8 @@ defmodule Votes do
     0
   """
   def count(votes, vote) do
+    Enum.filter(votes, fn vt -> vt == vote end)
+    |> Enum.count()
   end
 end
 ```
@@ -120,6 +122,10 @@ defmodule Votes do
     %{dog: 2, cat: 3, bird: 1}
   """
   def tally(votes) do
+    Enum.reduce(votes, %{}, fn vote, acc ->
+      {count, _} = Map.pop(acc, vote, 0)
+      Map.put(acc, vote, count + 1)
+    end)
   end
 end
 ```
