@@ -176,7 +176,10 @@ each generator creates another nested loop and therefore has a significant perfo
 In the Elixir cell below, use a comprehension to create a list of even integers from `2` to `100`.
 
 ```elixir
-
+for each <- 1..100 do
+  each
+end
+|> Enum.filter(fn int -> rem(int, 2) == 0 end)
 ```
 
 ## Filters
@@ -251,7 +254,9 @@ flowchart
 ```
 
 ```elixir
-
+for a <- 1..6, b <- 1..6, a + b === 7 do
+  {a, b}
+end
 ```
 
 ## Collectables
@@ -314,7 +319,9 @@ You can use <code>:binary.first/1</code> to convert a variable bound to a string
 </details>
 
 ```elixir
-
+for a <- String.split("lmnopq", "", trim: true), into: %{} do
+  {a, :binary.first(a)}
+end
 ```
 
 ## Why Use A Comprehension?
@@ -337,7 +344,9 @@ Enum.map(1..5, fn each -> each * 2 end)
 ```
 
 ```elixir
-
+for a <- 1..5 do
+  a * 2
+end
 ```
 
 In the Elixir cell below, convert the following `Enum.reduce` into a comprehension.
@@ -350,7 +359,9 @@ Enum.reduce(["a", "b", "c"], fn each, acc -> acc <> each end)
 ```
 
 ```elixir
-
+for char <- ["a", "b", "c"], into: "" do
+  char
+end
 ```
 
 In the Elixir cell below, convert the following nested `Enum.map` into a comprehension with three generators.
@@ -363,7 +374,9 @@ Enum.map(1..3, fn a -> Enum.map(1..3, fn b -> {a, b} end) end)
 ```
 
 ```elixir
-
+for a <- 1..3, b <- 1..3 do
+  {a, b}
+end
 ```
 
 ## Commit Your Progress
