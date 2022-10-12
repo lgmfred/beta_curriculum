@@ -71,7 +71,7 @@ defmodule Palindrome do
   """
   def palindrome?(string) do
     string
-    |> String.split("")
+    |> String.split("", trim: true)
     |> Enum.reverse()
     |> Enum.join() == string
   end
