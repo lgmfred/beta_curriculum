@@ -41,6 +41,13 @@ defmodule NumberFinder do
     -3
   """
   def smallest(number_list) do
+    Enum.reduce(number_list, fn num, acc ->
+      cond do
+        num < acc -> num
+        num > acc -> acc
+        num == acc -> acc
+      end
+    end)
   end
 
   @doc """
@@ -56,6 +63,13 @@ defmodule NumberFinder do
     20
   """
   def largest(number_list) do
+    Enum.reduce(number_list, fn num, acc ->
+      cond do
+        num < acc -> acc
+        num > acc -> num
+        num == acc -> num
+      end
+    end)
   end
 end
 ```
