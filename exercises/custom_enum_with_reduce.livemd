@@ -77,6 +77,7 @@ defmodule CustomEnum do
     [7, 6, 5, 4]
   """
   def reverse(list) do
+    Enum.reduce(list, [], fn elem, acc -> [elem | acc] end)
   end
 
   @doc """
@@ -91,6 +92,10 @@ defmodule CustomEnum do
     [true, true, true]
   """
   def map(list, callback_function) do
+    Enum.reduce(list, [], fn elem, acc ->
+      [callback_function.(elem) | acc]
+    end)
+    |> reverse()
   end
 
   @doc """
@@ -106,6 +111,14 @@ defmodule CustomEnum do
     ["2", "3"]
   """
   def filter(list, callback_function) do
+    Enum.reduce(list, [], fn elem, acc ->
+      if callback_function.(elem) do
+        [elem | acc]
+      else
+        acc
+      end
+    end)
+    |> reverse()
   end
 
   @doc """
@@ -120,6 +133,9 @@ defmodule CustomEnum do
     3
   """
   def sum(list_of_integers) do
+    Enum.reduce(list_of_integers, fn elem, acc ->
+      elem + acc
+    end)
   end
 
   @doc """
@@ -134,6 +150,9 @@ defmodule CustomEnum do
     "Hello, World!"
   """
   def join(list_of_strings) do
+    Enum.reduce(list_of_strings, fn elem, acc ->
+      acc <> elem
+    end)
   end
 end
 ```
