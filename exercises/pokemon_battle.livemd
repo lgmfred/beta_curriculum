@@ -85,6 +85,21 @@ defmodule Pokemon do
     iex> %Pokemon{name: "Charmander", type: :fire, speed: 20}
     %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
   """
+  @enforce_keys [:name, :type, :health, :attack, :speed]
+  defstruct @enforce_keys
+
+  defp strong?(type1, type2) do
+    case {type1, type2} do
+      {_elem, _elem} -> :normal
+      {:fire, :grass} -> :advantage
+      {:grass, :water} -> :advantage
+      {:water, :fire} -> :advantage
+      {:fire, :water} -> :advantage
+      {:grass, :fire} -> :advantage
+      {:water, :grass} -> :advantage
+      _any -> :disadvantage
+    end
+  end
 
   @doc """
   subtract the attack damage of an attacker from the defender's health.
@@ -114,6 +129,11 @@ defmodule Pokemon do
     %Pokemon{name: "Charmander", type: :fire, health: 10, attack: 5, speed: 20}
   """
   def attack(attacker, defender) do
+    case strong?(attacker.type, defender.type) do
+      :normal -> %{defender | health: defender.health - attacker.attack}
+      :advantage -> %{defender | health: defender.health - 2 * attacker.attack}
+      :disadvantage -> %{defender | health: defender.health - 0.5 * attacker.attack}
+    end
   end
 end
 ```
@@ -166,7 +186,11 @@ Pokemon.attack(charmander, bulbasaur)
 Enter your solution below.
 
 ```elixir
+charmander = %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+bulbasaur = %Pokemon{name: "Bulbasaur", type: :grass, health: 20, attack: 5, speed: 20}
+squirtle = %Pokemon{name: "Squirtle", type: :water, health: 20, attack: 5, speed: 20}
 
+Pokemon.attack(charmander, bulbasaur)
 ```
 
 ## Commit Your Progress

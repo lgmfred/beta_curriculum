@@ -106,7 +106,11 @@ end
 </details>
 
 ```elixir
-
+defmodule Math do
+  def add(int1, int2) do
+    int1 + int2
+  end
+end
 ```
 
 ## Internal Module Functions
@@ -138,9 +142,14 @@ defmodule InspectorGadget do
   def necktie do
     gogo("necktie")
   end
+
+  def arms do
+    gogo("arms")
+  end
 end
 
 InspectorGadget.necktie()
+InspectorGadget.arms()
 ```
 
 However, we must include the module name when using the module's function outside of the module. For example, the following will raise an error.
@@ -338,7 +347,13 @@ end
 Enter your solution below.
 
 ```elixir
+defmodule Languages.French do
+  def salutation do
+    "Bonjour"
+  end
+end
 
+Languages.French.salutation()
 ```
 
 ### Nested Modules
@@ -377,8 +392,8 @@ We use the `@` symbol to define a compile-time module attribute.
 
 ```elixir
 defmodule Hero do
-  @name "Spider-Man"
-  @nemesis "Green Goblin"
+  @name "Neo"
+  @nemesis "A. Smith"
 
   def introduce do
     "Hello, my name is #{@name}!"
@@ -530,7 +545,36 @@ end
 </details>
 
 ```elixir
+defmodule Math do
+  @moduledoc """
+  The Mathematics module
+  """
 
+  @doc """
+  Return sum of two numbers
+
+  ## Examples
+    iex> Math.add(2, 5)
+    7
+  """
+  def add(int1, int2) do
+    int1 + int2
+  end
+
+  @doc """
+  Return the sum of three numbers
+
+  ## Examples
+    iex> Math.add(1, 2, 3)
+    6
+  """
+  def add(int1, int2, int3) do
+    int1 + int2 + int3
+  end
+end
+
+Math.add(2, 5)
+Math.add(1, 2, 3)
 ```
 
 ## Default Arguments
@@ -594,7 +638,13 @@ This sometimes results in some confusion with the function's arity, and the numb
 In the Elixir cell below, define a module with a function that uses a default argument.
 
 ```elixir
+defmodule Multiply do
+  def multiply(int1, int2 \\ 1) do
+    int1 * int2
+  end
+end
 
+Multiply.multiply(2)
 ```
 
 ## Documentation

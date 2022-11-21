@@ -98,7 +98,7 @@ In the Elixir cell below, create a keyword list of your favourite super hero. In
 Enter your solution below.
 
 ```elixir
-
+[name: "Spidernam", secret_identity: "Peter Parker"]
 ```
 
 ## Keyword List Operators
@@ -121,13 +121,13 @@ evaluate as a tuple again. Remember that keyword lists are simply lists of tuple
 In the Elixir cell below, use `++` to add `[one: 1]` to `[two: 2]` to make `[one: 1, two: 2]`.
 
 ```elixir
-
+keyword_list = [one: 1] ++ [two: 2]
 ```
 
 Remove `[two: 2]` from `[one: 1, two: 2]` to make `[one: 1]`.
 
 ```elixir
-
+keyword_list -- [two: 2]
 ```
 
 ## Pattern Matching
