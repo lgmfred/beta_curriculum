@@ -2,10 +2,9 @@
 
 ```elixir
 Mix.install([
+  {:kino, "~> 0.7.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
-  {:hidden_cell, github: "brooklinjazz/hidden_cell"},
-  {:tested_cell, github: "brooklinjazz/tested_cell"},
-  {:utils, path: "#{__DIR__}/../utils"}
+  {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
 ```
 
@@ -251,10 +250,8 @@ Points.tally([10, 20])
 Points.tally(10)
 {:error, :invalid}
 
-
 Points.tally([1, 10])
 {:error, :invalid}
-
 
 Points.tally([10, 20, 30])
 {:error, :invalid}
@@ -266,12 +263,14 @@ Points.tally([10, 20, 30])
 ```elixir
 defmodule Points do
   def tally(scores) do
-    with [score1, score2] <- scores, true <- is_integer(score1), true <- is_integer(score2) do
-      score1 + score2
+    with [score1, score2] <- scores,
+        true <- is_integer(score1) and is_integer(score2),
+        true <- score1 >= 10 and score2 >= 10 do
+      {:ok, score1 + score2}
     else
       _ -> {:error, :invalid}
-    end
-  end
+    end 
+  end 
 end
 ```
 
@@ -288,15 +287,21 @@ end
 
 ## Commit Your Progress
 
-Run the following in your command line from the beta_curriculum folder to track and save your progress in a Git commit.
+Run the following in your command line from the curriculum folder to track and save your progress in a Git commit.
+Ensure that you do not already have undesired or unrelated changes by running `git status` or by checking the source control tab in Visual Studio Code.
 
 ```
+$ git checkout main
+$ git checkout -b exercise-with
 $ git add .
 $ git commit -m "finish with section"
+$ git push origin exercise-with
 ```
 
-## Up Next
+Create a pull request to your forked `main` branch. Please do not create a pull request to the DockYard Academy repository as this will spam our PR tracker.
 
-| Previous                                       | Next                                       |
-| ---------------------------------------------- | -----------------------------------------: |
-| [Book Search](../exercises/book_search.livemd) | [Behaviours](../reading/behaviours.livemd) |
+**DockYard Academy Students Only:**
+
+Notify your teacher by including `@BrooklinJazz` in your PR description to get feedback.
+
+If you are interested in joining the next academy cohort, [sign up here](https://academy.dockyard.com/) to receive more news when it is available.

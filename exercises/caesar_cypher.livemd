@@ -2,10 +2,9 @@
 
 ```elixir
 Mix.install([
+  {:kino, "~> 0.7.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
-  {:hidden_cell, github: "brooklinjazz/hidden_cell"},
-  {:tested_cell, github: "brooklinjazz/tested_cell"},
-  {:utils, path: "#{__DIR__}/../utils"}
+  {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
 ```
 
@@ -76,6 +75,70 @@ end
 Implement the `CaesarCypher` module as documented.
 
 ```elixir
+# list -> list (same length)
+
+# Brute Force
+
+key = 2
+
+String.split("abcdefghijklmnopqrstuvwxyz", "", trim: true)
+|> Enum.map(fn char ->
+  nil
+end)
+
+## Five Ideas
+### Treat the Characters As Integers.
+### Use the Alphabet As An Index
+["a", "b", "c"]
+0
+1
+# new char
+"b"
+
+"c"
+2
+3
+nil
+
+list_of_chars = "abc" |> String.split("", trim: true)
+
+"abc"
+|> String.split("", trim: true)
+|> Enum.map(fn char ->
+  incremented_index =
+    Enum.find_index(list_of_chars, fn alphabet_char ->
+      char == alphabet_char
+    end) + 1
+
+  # circle back
+  if incremented_index == length(list_of_chars) do
+    IO.inspect(char)
+  else
+    Enum.at(list_of_chars, incremented_index)
+  end
+end)
+```
+
+```elixir
+
+```
+
+```elixir
+?x
+```
+
+```elixir
+# list of numbers
+[97, 98, 99]
+# list of char codes
+[97, 98, 99]
+```
+
+```elixir
+[97, 98, 99, 126]
+```
+
+```elixir
 defmodule CaesarCypher do
   @moduledoc """
   Documentation for `CaesarCypher`
@@ -90,7 +153,9 @@ defmodule CaesarCypher do
     iex> CaesarCypher.encode("abcdefghijklmnopqrstuvwyxz")
     "bcdefghijklmnopqrstuvwyxza"
   """
+  @spec encode(String.t()) :: String.t()
   def encode(string) do
+    2
   end
 
   @doc """
@@ -104,7 +169,7 @@ defmodule CaesarCypher do
 
     iex> CaesarCypher.encode("abcdefghijklmnopqrstuvwyxz", 2)
     "cdefghijklmnopqrstuvwyxzab"
-    
+
     iex> CaesarCypher.encode("abcdefghijklmnopqrstuvwyxz", 14)
     "opqrstuvwxyzabcdefghijklmn"
   """
@@ -115,12 +180,24 @@ end
 
 ## Commit Your Progress
 
-Run the following in your command line from the beta_curriculum folder to track and save your progress in a Git commit.
+Run the following in your command line from the curriculum folder to track and save your progress in a Git commit.
+Ensure that you do not already have undesired or unrelated changes by running `git status` or by checking the source control tab in Visual Studio Code.
 
 ```
+$ git checkout main
+$ git checkout -b exercise-caesar_cypher
 $ git add .
 $ git commit -m "finish caesar cypher exercise"
+$ git push origin exercise-caesar_cypher
 ```
+
+Create a pull request to your forked `main` branch. Please do not create a pull request to the DockYard Academy repository as this will spam our PR tracker.
+
+**DockYard Academy Students Only:**
+
+Notify your teacher by including `@BrooklinJazz` in your PR description to get feedback.
+
+If you are interested in joining the next academy cohort, [sign up here](https://academy.dockyard.com/) to receive more news when it is available.
 
 ## Up Next
 

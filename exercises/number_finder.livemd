@@ -2,10 +2,9 @@
 
 ```elixir
 Mix.install([
+  {:kino, "~> 0.7.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
-  {:hidden_cell, github: "brooklinjazz/hidden_cell"},
-  {:tested_cell, github: "brooklinjazz/tested_cell"},
-  {:utils, path: "#{__DIR__}/../utils"}
+  {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
 ```
 
@@ -43,6 +42,13 @@ defmodule NumberFinder do
     -3
   """
   def smallest(number_list) do
+    Enum.reduce(number_list, fn num, acc ->
+      cond do
+        num < acc -> num
+        num > acc -> acc
+        num == acc -> acc
+      end
+    end)
   end
 
   @doc """
@@ -58,6 +64,13 @@ defmodule NumberFinder do
     20
   """
   def largest(number_list) do
+    Enum.reduce(number_list, fn num, acc ->
+      cond do
+        num < acc -> acc
+        num > acc -> num
+        num == acc -> num
+      end
+    end)
   end
 end
 ```

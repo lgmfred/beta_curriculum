@@ -2,12 +2,9 @@
 
 ```elixir
 Mix.install([
+  {:kino, "~> 0.7.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
-  {:hidden_cell, github: "brooklinjazz/hidden_cell"},
-  {:tested_cell, github: "brooklinjazz/tested_cell"},
-  {:smart_animation, github: "brooklinjazz/smart_animation"},
-  {:visual, github: "brooklinjazz/visual"},
-  {:utils, path: "#{__DIR__}/../utils"}
+  {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
 ```
 
@@ -90,7 +87,7 @@ flowchart TB
 
 Let's look at a more practical example of taking a collection, and returning a non-list output.
 
-In the [Anagram](../exercises/anagram.livemd) exercise you previously completed, you built an `Anagram.anagram?2` function to determine if two strings are anagrams. One solution to the problem is to build a map storing the character counts of two strings.
+In the [Anagram](../exercises/anagram.livemd) exercise you previously completed, you built an `Anagram.anagram?/2` function to determine if two strings are anagrams. One solution to the problem is to build a map storing the character counts of two strings.
 
 For example, to determine if `"state"` and `"taste"` are anagrams of each other, we can convert them into the following maps with a count of each character, and check if they are equal. Remember that order in maps does not matter.
 
@@ -134,7 +131,7 @@ If there is an existing key, then it can update the map key using the existing v
 Map.update(updated_map, :key, "default value", fn current -> "updated: #{current}" end)
 ```
 
-When converting a string to a map of character counts, If there is no key, the value will be `1`. If there is an existing key in the map, the value will be the current value incremented by `1`. Here are the steps we want to accomplish for our [Enum.reduce/3](https://hexdocs.pm/elixir/Enum.html#reduce/3) function.
+When converting a string to a map of character counts, if there is no key, the value will be `1`. If there is an existing key in the map, the value will be the current value incremented by `1`. Here are the steps we want to accomplish for our [Enum.reduce/3](https://hexdocs.pm/elixir/Enum.html#reduce/3) function.
 
 ```elixir
 initial_accumulator = %{}
@@ -186,7 +183,11 @@ end)
 </details>
 
 ```elixir
+split_int = Integer.digits(1_234_321)
 
+Enum.reduce(split_int, %{}, fn char, acc ->
+  Map.update(acc, char, 1, fn current -> current + 1 end)
+end)
 ```
 
 ## Further Reading
@@ -199,12 +200,24 @@ Consider the following resource(s) to deepen your understanding of the topic.
 
 ## Commit Your Progress
 
-Run the following in your command line from the beta_curriculum folder to track and save your progress in a Git commit.
+Run the following in your command line from the curriculum folder to track and save your progress in a Git commit.
+Ensure that you do not already have undesired or unrelated changes by running `git status` or by checking the source control tab in Visual Studio Code.
 
 ```
+$ git checkout main
+$ git checkout -b exercise-reduce
 $ git add .
 $ git commit -m "finish reduce section"
+$ git push origin exercise-reduce
 ```
+
+Create a pull request to your forked `main` branch. Please do not create a pull request to the DockYard Academy repository as this will spam our PR tracker.
+
+**DockYard Academy Students Only:**
+
+Notify your teacher by including `@BrooklinJazz` in your PR description to get feedback.
+
+If you are interested in joining the next academy cohort, [sign up here](https://academy.dockyard.com/) to receive more news when it is available.
 
 ## Up Next
 
