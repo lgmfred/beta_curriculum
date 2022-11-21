@@ -2,6 +2,7 @@
 
 ```elixir
 Mix.install([
+  {:kino, "~> 0.7.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
   {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
@@ -145,26 +146,26 @@ defmodule Warehouse do
 
       Existing quantity.
 
-      iex> ref = Inventory.new()
-      iex> Inventory.store(ref, :apples, 5)
-      iex> Inventory.get_boxes(ref, :apples)
+      iex> ref = Warehouse.new()
+      iex> Warehouse.store(ref, :apples, 5)
+      iex> Warehouse.get_boxes(ref, :apples)
       [apples: 5]
 
       Multiple Boxes.
 
-      iex> ref = Inventory.new()
-      iex> Inventory.store(ref, :apples, 1)
-      iex> Inventory.store(ref, :apples, 3)
-      iex> Inventory.get_boxes(ref, :apples)
+      iex> ref = Warehouse.new()
+      iex> Warehouse.store(ref, :apples, 1)
+      iex> Warehouse.store(ref, :apples, 3)
+      iex> Warehouse.get_boxes(ref, :apples)
       [apples: 1, apples: 3]
   """
 
   @doc """
-  Create a new Inventory :ets table.
+  Create a new Warehouse :ets table.
 
   ## Examples
 
-      iex> ref = Inventory.new()
+      iex> ref = Warehouse.new()
       iex> is_reference(ref)
       true
   """
@@ -176,21 +177,21 @@ defmodule Warehouse do
 
   ## Examples
 
-      iex> ref = Inventory.new()
-      iex> Inventory.get_boxes(ref, :apples)
+      iex> ref = Warehouse.new()
+      iex> Warehouse.get_boxes(ref, :apples)
       []
   """
   def get_boxes(ref, item) do
   end
 
   @doc """
-  Store an item in inventory.
+  Store an item in the warehouse.
   If item exists, add amount to existing total.
 
     ## Examples
 
-      iex> ref = Inventory.new()
-      iex> Inventory.store(ref, :apples, 5)
+      iex> ref = Warehouse.new()
+      iex> Warehouse.store(ref, :apples, 5)
       true
   """
   def store(ref, item, quantity) do
@@ -221,6 +222,6 @@ If you are interested in joining the next academy cohort, [sign up here](https:/
 
 ## Up Next
 
-| Previous                                           | Next                                                                         |
-| -------------------------------------------------- | ---------------------------------------------------------------------------: |
-| [Agent Journal](../exercises/agent_journal.livemd) | [Games Global Score Tracker](../exercises/games_global_score_tracker.livemd) |
+| Previous                                           | Next                                                                 |
+| -------------------------------------------------- | -------------------------------------------------------------------: |
+| [Agent Journal](../exercises/agent_journal.livemd) | [Advanced Score Tracker](../exercises/advanced_score_tracker.livemd) |

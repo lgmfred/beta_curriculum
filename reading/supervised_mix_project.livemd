@@ -2,6 +2,7 @@
 
 ```elixir
 Mix.install([
+  {:kino, "~> 0.7.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
   {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
@@ -26,6 +27,11 @@ To demonstrate, we're going to create a supervised rock paper scissors applicati
 
 ```
 $ mix new rock_paper_scissors --sup
+```
+
+Which creates the following files.
+
+```
 * creating README.md
 * creating .formatter.exs
 * creating .gitignore
@@ -236,7 +242,7 @@ defmodule RockPaperScissors do
   end
 
   def handle_info(:prompt, state) do
-    choice = "Please enter rock, paper, or scissors." |> IO.gets() |> String.trim()
+    choice = "Please enter rock, paper, or scissors.\n" |> IO.gets() |> String.trim()
     send(self(), :prompt)
     {:noreply, state}
   end
@@ -301,7 +307,7 @@ defmodule RockPaperScissors do
   end
 
   def handle_info(:prompt, state) do
-    choice = "Please enter rock, paper, or scissors." |> IO.gets() |> String.trim()
+    choice = "Please enter rock, paper, or scissors.\n" |> IO.gets() |> String.trim()
     answer = Enum.random(["rock", "paper", "scissors"])
 
     result =
@@ -380,6 +386,6 @@ If you are interested in joining the next academy cohort, [sign up here](https:/
 
 ## Up Next
 
-| Previous                                                       | Next                                                                 |
-| -------------------------------------------------------------- | -------------------------------------------------------------------: |
-| [Games Score Tracker](../exercises/games_score_tracker.livemd) | [Games Supervisor Setup](../exercises/games_supervisor_setup.livemd) |
+| Previous                                                       | Next                                                                                   |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------: |
+| [Games Score Tracker](../exercises/games_score_tracker.livemd) | [Supervisor And GenServer Drills](../exercises/supervisor_and_genserver_drills.livemd) |

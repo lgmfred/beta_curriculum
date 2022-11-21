@@ -2,6 +2,7 @@
 
 ```elixir
 Mix.install([
+  {:kino, "~> 0.7.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
   {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
@@ -30,7 +31,7 @@ The game should prompt the user for a choice of `"rock"`, `"paper"`, or `"scisso
 <!-- livebook:{"force_markdown":true} -->
 
 ```elixir
-iex> Games.RockPaperScissors.start()
+iex> Games.RockPaperScissors.play()
 (rock/paper/scissors): scissors
 ```
 
