@@ -54,9 +54,12 @@ Implement the `ReplaceNils` module as below:
 
 ```elixir
 defmodule ReplaceNils do
-  def replace(input1, input2) do
-    nil
-  end
+  def replace(list1, list2, acc \\ [])
+
+  def replace([], _lb, acc), do: Enum.reverse(acc)
+  def replace(_la, [], acc), do: Enum.reverse(acc)
+  def replace([nil | at], [bh | bt], acc), do: replace(at, bt, [bh | acc])
+  def replace([ah | at], [_bh | bt], acc), do: replace(at, bt, [ah | acc])
 end
 ```
 
