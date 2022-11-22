@@ -95,7 +95,30 @@ defmodule Metric do
     iex> Metric.convert({:kilometer, 10}, :centimeter)
     1000000
   """
-  def convert(from, to) do
+  @spec convert(tuple, atom) :: tuple
+  def convert(tuple, unit) do
+    {_unit, value} = from_meter(to_meter(tuple), unit)
+    value
+  end
+
+  @spec to_meter(tuple) :: tuple
+  def to_meter({unit, value}) do
+    case {unit, value} do
+      {:millimeter, value} -> {:millimeter, value * 0.001}
+      {:centimeter, value} -> {:milliliter, value * 0.01}
+      {:meter, value} -> {:milliliter, value}
+      {:kilometer, value} -> {:milliliter, value * 1000}
+    end
+  end
+
+  @spec from_meter(tuple, atom) :: tuple
+  def from_meter({_from_unit, value}, to_unit) do
+    case to_unit do
+      :millimeter -> {:millimeter, value / 0.001}
+      :centimeter -> {:centimeter, value / 0.01}
+      :meter -> {:meter, value}
+      :kilometer -> {:kilometer, value / 1000}
+    end
   end
 end
 ```
