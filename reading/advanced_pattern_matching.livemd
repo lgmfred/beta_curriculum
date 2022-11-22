@@ -55,7 +55,7 @@ end
 Trigger the `"A"` case. Replace `nil` with your answer.
 
 ```elixir
-case nil do
+case [1, 2, 3] do
   [_, _, 3] -> "A"
   _ -> "default"
 end
@@ -114,7 +114,8 @@ Enter your solution below.
 
 ```elixir
 defmodule Hello do
-  def everyone(list) do
+  def everyone([_, _, _ | _tl]) do
+    "Hello, ereryone!"
   end
 end
 ```
@@ -184,7 +185,12 @@ end)
 </details>
 
 ```elixir
-[{:double, 2}, {:halve, 10}, {:double, 4}]
+list = [{:double, 2}, {:halve, 10}, {:double, 4}]
+
+Enum.map(list, fn
+  {:double, int} -> int * 2
+  {:halve, int} -> int / 2
+end)
 ```
 
 ## Pattern Matching Vs. If
@@ -346,7 +352,7 @@ actual = {"hello", "hi"}
 expected = {"hello"}
 actual = {"hello", "hi"}
 
-expected = actual
+^expected = actual
 ```
 
 ## Further Reading
