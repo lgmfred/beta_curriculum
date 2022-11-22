@@ -105,6 +105,15 @@ defmodule RockPaperScissorsPatternMatching do
     "draw!"
   """
   def play(guess1, guess2) do
+    case {guess1, guess2} do
+      {_draw, _draw} -> "draw"
+      {:rock, :paper} -> "paper beats rock!"
+      {:rock, :scissors} -> "rock beats scissors!"
+      {:paper, :rock} -> "paper beats rock!"
+      {:paper, :scissors} -> "scissors beats paper!"
+      {:scissors, :rock} -> "rock beats scissors!"
+      {:scissors, :paper} -> "cissors beats paper!"
+    end
   end
 end
 ```
