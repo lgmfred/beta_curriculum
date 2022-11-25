@@ -121,7 +121,16 @@ defmodule Math do
     iex> Math.add(%{}, %{})
     ** (FunctionClauseError) no function clause matching in Math.add/2 
   """
-  def add(value1, value2) do
+  def add(val1, val2) when is_integer(val1) and is_integer(val2) do
+    val1 + val2
+  end
+
+  def add(val1, val2) when is_binary(val1) and is_binary(val2) do
+    val1 <> val2
+  end
+
+  def add(val1, val2) when is_list(val1) and is_list(val2) do
+    val1 ++ val2
   end
 
   @doc """
@@ -160,7 +169,17 @@ defmodule Math do
     iex> Math.subtract(%{}, %{})
     ** (FunctionClauseError) no function clause matching in Math.subtract/2 
   """
-  def subtract(value1, value2) do
+  def subtract(val1, val2) when is_integer(val1) and is_integer(val2) do
+    val1 - val2
+  end
+
+  def subtract(val1, val2) when is_binary(val1) and is_binary(val2) do
+    (String.split(val1, "") -- String.split(val2, ""))
+    |> List.to_string()
+  end
+
+  def subtract(val1, val2) when is_list(val1) and is_list(val2) do
+    val1 -- val2
   end
 end
 ```
