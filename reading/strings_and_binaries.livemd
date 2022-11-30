@@ -28,7 +28,7 @@ strings in Elixir are represented internally as binaries.
 is_binary("hello")
 ```
 
-A binary is a sequence of bytes. bytes are a grouping of eight bits.
+A binary is a sequence of bytes. Bytes are a grouping of eight bits.
 
 A bit is a single value represented as `0` or `1`. `0` and `1` correspond to on and off for an electrical signal.
 
@@ -210,13 +210,13 @@ String.graphemes("é")
 Use [String.graphemes/1](https://hexdocs.pm/elixir/String.html#graphemes/1) to convert the [woman fire fighter](https://emojipedia.org/woman-firefighter/) emoji 👩‍🚒 to a list of graphemes.
 
 ```elixir
-
+String.graphemes("👩‍🚒")
 ```
 
 Use [String.codepoints/1](https://hexdocs.pm/elixir/String.html#codepoints/1) to convert the emoji 👩‍🚒 into a list of codepoints. You'll notice it's actually a combination of the 👩 and 🚒 emojis.
 
 ```elixir
-
+String.codepoints("👩‍🚒")
 ```
 
 ## Hexadecimal
@@ -229,7 +229,7 @@ Hexadecimal is a base 16 counting system.
 If base 10 uses ten symbols (0-9) and base 2 uses two symbols (0, 1), then Hexadecimal uses
 sixteen symbols (0-9 a-f).
 
-Hexadecimal uses decimal symbols from `1` to `9`. Then switches to using the letters `a` to `f` as you can see in the following table.
+Hexadecimal uses decimal symbols from `0` to `9`. Then switches to using the letters `a` to `f` as you can see in the following table.
 
 <!-- livebook:{"attrs":{"source":"\"0,1,2,3,4,5,6,7,8,9,10,a,b,c,d,e,f\"\n|> String.split(\",\")\n|> Enum.with_index()\n|> Enum.map(fn {symbol, index} -> %{integer: \"#{index}\", hexadecimal: symbol} end)\n|> Enum.take(-10)\n|> Kino.DataTable.new()","title":"Hexadecimal"},"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
@@ -308,7 +308,7 @@ Use hexadecimal `0x` syntax to represent the number `15`.
 </details>
 
 ```elixir
-
+0xF
 ```
 
 ## Bitstrings
@@ -408,7 +408,9 @@ Convert the alphabet `"abcdefghijklmnopqrstuvwxyz"` to a charlist, then inspect 
 </details>
 
 ```elixir
-
+"abcdefghijklmnopqrstuvwxyz"
+|> String.to_charlist()
+|> IO.inspect(charlists: :as_lists)
 ```
 
 ## Commit Your Progress
