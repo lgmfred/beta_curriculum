@@ -338,7 +338,9 @@ end)
 </details>
 
 ```elixir
-
+Regex.replace(~r/(\d{3}-)\d{3}-\d{4}/, "999-999-9999", fn _match, group ->
+  group <> "XXX-XXXX"
+end)
 ```
 
 ## Lookaround
@@ -418,7 +420,10 @@ end)
 </details>
 
 ```elixir
-
+# Regex.scan(~r/\#(\d{3})(\d{3})(\d{4})/, "#9999999999")
+Regex.replace(~r/\#(\d{3})(\d{3})(\d{4})/, "#9999999999", fn _match, grp1, grp2, grp3 ->
+  "#{grp1}-#{grp2}-#{grp3}"
+end)
 ```
 
 ## Further Reading
