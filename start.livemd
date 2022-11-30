@@ -414,6 +414,8 @@ If you do not see the box above, or if you encounter any issues with this course
   * [HTML + CSS](reading/html_css.livemd)
 * Exercises
   * [Common Components](exercises/common_components.livemd)
+  * Bonus: Play [FlexBox Froggy](https://flexboxfroggy.com/)
+  * Bonus: Play [Grid Garden](https://cssgridgarden.com/)
   * Bonus: [Home Page](exercises/home_page.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
@@ -434,19 +436,10 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Web Servers](reading/web_servers.livemd)
   * [HexDocs: Phoenix Up and Running](https://hexdocs.pm/phoenix/up_and_running.html)
   * [Phoenix 1.6](reading/phoenix_1.6.livemd)
-  * [Phoenix 1.7](reading/phoenix_1.7.livemd)
+  * Bonus: [Phoenix 1.7](reading/phoenix_1.7.livemd)
 * Exercises
-  * [In-Memory TodoList]
-  * [Portfolio: Setup]
-
-<!-- livebook:{"break_markdown":true} -->
-
-### Phoenix Components
-
-* Reading
-  * Phoenix Components
-* Exercises
-  * Form
+  * Drills: [Phoenix](exercises/phoenix_drills.livemd)
+  * [In-Memory TodoList](exercises/in-memory_todo_list.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -454,38 +447,51 @@ If you do not see the box above, or if you encounter any issues with this course
 
 * Reading
   * [Tailwind](reading/tailwind.livemd)
+  * [Phoenix + Tailwind Installation Guide](https://tailwindcss.com/docs/guides/phoenix)
 * Exercises
   * [Tailwind CSS Components](exercises/tailwind_css_components.livemd)
-  * [Portfolio: Home Page](exercises/portfolio_home_page.livemd)
+  * Mastery: [Portfolio](exercises/portfolio.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
-### Data Validation
+### Forms and Validation
 
 * Reading
   * [Ecto Changeset](reading/ecto_changeset.livemd)
+  * [Phoenix Forms](reading/phoenix_forms.livemd)
 * Exercises
   * [Sign Up Form](exercises/sign_up_form.livemd)
-  * Bonus: [Book Changset](exercises/book_changeset.livemd)
-
-<!-- livebook:{"break_markdown":true} -->
-
-### Relational Database Management Systems and Ecto
-
-* Reading
-  * [Relational Database Management Systems](reading/rdbms.livemd)
-  * [Ecto](reading/ecto.livemd)
-* Exercises
-  * SQL Queries
+  * Bonus: [Book Changeset](exercises/book_changeset.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
 ### Phoenix and Ecto
 
 * Reading
+  * [Relational Database Management Systems](reading/rdbms.livemd)
   * [Phoenix and Ecto](reading/phoenix_and_ecto.livemd)
 * Exercises
-  * [Portfolio: Blog Page](exercises/portfolio_blog_page.livemd)
+  * [Drills: SQL Queries](exercises/sql_drills.livemd)
+  * [Blog: Setup](exercises/blog_setup.livemd)
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Testing Phoenix
+
+* Reading
+  * [Phoenix: Introduction to Testing](https://hexdocs.pm/phoenix/testing.html)
+  * [BookSearch: Authors](reading/book_search_authors.livemd)
+* Exercises
+  * [Blog: Search](exercises/blog_search.livemd)
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Schemas and Migrations
+
+* Reading
+  * Schemas and Migrations
+* Exercises
+  * Mastery: Book List
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -495,15 +501,6 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Phoenix Authentication](reading/phoenix_authentication.livemd)
 * Exercises
   * [Portfolio: Authenticated Blog Page](exercises/portfolio_auth_blog_page.livemd)
-
-<!-- livebook:{"break_markdown":true} -->
-
-### Testing Phoenix
-
-* Reading
-  * [BookSearch: Authors](reading/book_search_authors.livemd)
-* Exercises
-  * [Portfolio: Blog Search](exercises/portfolio_blog_search.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -539,8 +536,7 @@ If you do not see the box above, or if you encounter any issues with this course
 * Reading
   * [LiveView](reading/liveview.livemd)
 * Exercises
-  * Portfolio: Setup
-  * [Portfolio: Math Game](exercises/math_game.livemd)
+  * [Math Game](exercises/math_game.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -550,15 +546,6 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Hexdocs: Phoenix.LiveViewTest](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveViewTest.html)
 * Exercises
   * [Portfolio: Rubber Ducky](exercises/rubber_ducky.livemd)
-
-<!-- livebook:{"break_markdown":true} -->
-
-### Phoenix Forms
-
-* Reading
-  * [HexDocs: Form Bindings](https://hexdocs.pm/phoenix_live_view/form-bindings.html)
-* Exercises
-  * Portfolio: Character Creator
 
 <!-- livebook:{"break_markdown":true} -->
 
