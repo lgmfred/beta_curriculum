@@ -363,7 +363,7 @@ for char <- ["a", "b", "c"], into: "" do
 end
 ```
 
-In the Elixir cell below, convert the following nested `Enum.map` into a comprehension with three generators.
+In the Elixir cell below, convert the following nested `Enum.map` into a comprehension.
 
 <!-- livebook:{"force_markdown":true} -->
 

@@ -1,4 +1,4 @@
-# Blog: Setup
+# Blog: Posts
 
 ```elixir
 Mix.install([
@@ -13,15 +13,16 @@ Mix.install([
 [Return Home](../start.livemd)<span style="padding: 0 30px"></span>
 [Report An Issue](https://github.com/DockYard-Academy/beta_curriculum/issues/new?assignees=&labels=&template=issue.md&title=)
 
-## Blog: Setup
+## Blog: Posts
 
 You're going to build a `Blog` application to learn more about Phoenix and Ecto.
 
 ```
 $ mix phx.new blog
+$ mix ecto.create
 ```
 
-blog posts should have a title, subtitle, and content.
+blog posts should have a `title`, `subtitle`, and `content`. It should also have relevant timestamp information.
 
 ```mermaid
 classDiagram
@@ -57,11 +58,26 @@ end
 
 </details>
 
+Ensure all tests pass.
+
+```
+mix test
+```
+
+Stage and commit your changes.
+
+```
+git add .
+git commit -m "initialize blog project with posts"
+```
+
+Create a [GitHub repository](https://github.com/new) and follow the instructions to connect your local blog project with the remote repository.
+
 ## Bonus: Validation
 
 Add the following validation rules to your `Post`.
 
-* `:title` must be between `3` and `10` characters.
+* `:title` must be between `3` and `50` characters.
 * `:subtitle` must be between `3` and `100` characters.
 
 Ensure these validations are enforced when you create or edit a post.
@@ -90,9 +106,3 @@ Create a pull request to your forked `main` branch. Please do not create a pull 
 Notify your teacher by including `@BrooklinJazz` in your PR description to get feedback.
 
 If you are interested in joining the next academy cohort, [sign up here](https://academy.dockyard.com/) to receive more news when it is available.
-
-## Up Next
-
-| Previous                                     | Next                                                         |
-| -------------------------------------------- | -----------------------------------------------------------: |
-| [Sql Drills](../exercises/sql_drills.livemd) | [Book Search Authors](../reading/book_search_authors.livemd) |
