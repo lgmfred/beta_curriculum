@@ -110,16 +110,16 @@ defmodule Math do
     "123456"
 
     iex> Math.add(1.0, 2.0)
-    ** (FunctionClauseError) no function clause matching in Math.add/2 
+    ** (FunctionClauseError) no function clause matching in Math.add/2
 
     iex> Math.add(2, "2")
-    ** (FunctionClauseError) no function clause matching in Math.add/2 
+    ** (FunctionClauseError) no function clause matching in Math.add/2
 
     iex> Math.add({}, {})
-    ** (FunctionClauseError) no function clause matching in Math.add/2 
+    ** (FunctionClauseError) no function clause matching in Math.add/2
 
     iex> Math.add(%{}, %{})
-    ** (FunctionClauseError) no function clause matching in Math.add/2 
+    ** (FunctionClauseError) no function clause matching in Math.add/2
   """
   def add(val1, val2) when is_integer(val1) and is_integer(val2) do
     val1 + val2
@@ -158,16 +158,16 @@ defmodule Math do
     "bc"
 
     iex> Math.subtract(1.0, 2.0)
-    ** (FunctionClauseError) no function clause matching in Math.subtract/2 
+    ** (FunctionClauseError) no function clause matching in Math.subtract/2
 
     iex> Math.subtract(2, "2")
-    ** (FunctionClauseError) no function clause matching in Math.subtract/2 
+    ** (FunctionClauseError) no function clause matching in Math.subtract/2
 
     iex> Math.subtract({}, {})
-    ** (FunctionClauseError) no function clause matching in Math.subtract/2 
+    ** (FunctionClauseError) no function clause matching in Math.subtract/2
 
     iex> Math.subtract(%{}, %{})
-    ** (FunctionClauseError) no function clause matching in Math.subtract/2 
+    ** (FunctionClauseError) no function clause matching in Math.subtract/2
   """
   def subtract(val1, val2) when is_integer(val1) and is_integer(val2) do
     val1 - val2
