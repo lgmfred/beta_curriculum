@@ -77,7 +77,101 @@ Test and implement a `Math` module. Include at least two assertions for each hap
 
 ```elixir
 defmodule Math do
+  def add(val1, val2) do
+    case {val1, val2} do
+      {val1, val2} when is_number(val2) and is_number(val2) -> {:ok, val1 + val2}
+      {val1, val2} when is_binary(val1) and is_binary(val2) -> {:ok, val1 <> val2}
+      {val1, val2} when is_list(val1) and is_list(val2) -> {:ok, val1 ++ val2}
+      {val1, val2} when is_map(val1) and is_map(val2) -> {:ok, Map.merge(val1, val2)}
+      _ -> {:error, :invalid_data}
+    end
+  end
+
+  def subtract(val1, val2) do
+    case {val1, val2} do
+      {val1, val2} when is_number(val2) and is_number(val2) ->
+        {:ok, val1 - val2}
+
+      {val1, val2} when is_binary(val1) and is_binary(val2) ->
+        char_list = String.to_charlist(val1) -- String.to_charlist(val2)
+        {:ok, List.to_string(char_list)}
+
+      {val1, val2} when is_list(val1) and is_list(val2) ->
+        {:ok, val1 -- val2}
+
+      {val1, val2} when is_map(val1) and is_map(val2) ->
+        list_result = Map.to_list(val1) -- Map.to_list(val2)
+
+        result =
+          Enum.reduce(list_result, %{}, fn {key, val}, acc ->
+            Map.put(acc, key, val)
+          end)
+
+        {:ok, result}
+
+      _ ->
+        {:error, :invalid_data}
+    end
+  end
 end
+
+ExUnit.start(autorun: false)
+
+defmodule MathTest do
+  use ExUnit.Case
+
+  describe "add!/2" do
+    test "with numbers" do
+      assert Math.add(5, 7) == {:ok, 12}
+      assert Math.add(3.7, 6.3) == {:ok, 10.0}
+    end
+
+    test "with strings" do
+      assert Math.add("lgm", "fred") == {:ok, "lgmfred"}
+      assert Math.add("ayiko ", "fred") == {:ok, "ayiko fred"}
+    end
+
+    test "with lists" do
+      assert Math.add([1, :a, 5], [2, :b, 7]) == {:ok, [1, :a, 5, 2, :b, 7]}
+
+      assert Math.add([1, one: "one"], [2, two: :two]) ==
+               {:ok, [1, {:one, "one"}, 2, {:two, :two}]}
+    end
+
+    test "with maps" do
+      assert Math.add(%{1 => "one"}, %{"ten" => 10}) == {:ok, %{1 => "one", "ten" => 10}}
+
+      assert Math.add(%{"a" => :a, b: :b}, %{'c' => 'c'}) ==
+               {:ok, %{:b => :b, 'c' => 'c', "a" => :a}}
+    end
+  end
+
+  describe "subtract!/2" do
+    test "with numbers" do
+      assert Math.subtract(5, 7) == {:ok, -2}
+      assert Math.subtract(10.9, 5.9) === {:ok, 5.0}
+    end
+
+    test "with strings" do
+      assert Math.subtract("lgmfred", "fred") == {:ok, "lgm"}
+      assert Math.subtract("ayikofred", "ayiko") == {:ok, "fred"}
+    end
+
+    test "with lists" do
+      assert Math.subtract([1, :a, 5, :c], [:a, 2, :b, 5]) == {:ok, [1, :c]}
+      assert Math.subtract([1, one: "one"], [1, one: "one"]) == {:ok, []}
+    end
+
+    test "with maps" do
+      assert Math.subtract(%{1 => "one", "ten" => 10}, %{"ten" => 10}) == {:ok, %{1 => "one"}}
+
+      assert Math.subtract(%{"a" => 1, "b" => 2, "c" => 3}, %{"b" => 2}) ==
+               {:ok, %{"a" => 1, "c" => 3}}
+    end
+  end
+end
+
+ExUnit.run()
 ```
 
 ### Bonus: Edge Cases
