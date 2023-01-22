@@ -2,7 +2,8 @@
 
 ```elixir
 Mix.install([
-  {:kino, "~> 0.7.0", override: true},
+  {:jason, "~> 1.4"},
+  {:kino, "~> 0.8.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
   {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
@@ -48,8 +49,8 @@ Enter your solution below.
 <!-- livebook:{"attrs":{"assertions":"list = [] ++ [\"grapes\", \"walnuts\", \"apples\"]\nlist = list ++ [\"blueberries\", \"chocolate\", \"pizza\"]\nlist = list -- [\"grapes\", \"walnuts\"]\nlist = list ++ [\"banana\", \"banana\", \"banana\"]\n\nassert is_list(shopping_cart), \"Ensure shopping_list is still a list.\"\n\nassert shopping_cart == list","attempts":3,"code":"shopping_cart = []\nshopping_cart = shopping_cart ++ [\"grapes\", \"walnuts\", \"apples\"]\nshopping_cart = shopping_cart ++ [\"blueberries\", \"chocolate\", \"pizza\"]\nshopping_cart = shopping_cart -- [\"grapes\", \"walnuts\"]\nshopping_cart = shopping_cart ++ [\"banana\", \"banana\", \"banana\"]","solution":"","title":"Shopping Cart"},"kind":"Elixir.TestedCell","livebook_object":"smart_cell"} -->
 
 ```elixir
-ExUnit.start(auto_run: false)
 
+<<<<<<< HEAD
 defmodule Assertion do
   use ExUnit.Case
 
@@ -124,6 +125,8 @@ shopping_cart = shopping_cart ++ ["grapes", "walnuts", "apples"]
 shopping_cart = shopping_cart ++ ["blueberries", "chocolate", "pizza"]
 shopping_cart = shopping_cart -- ["grapes", "walnuts"]
 shopping_cart = shopping_cart ++ ["banana", "banana", "banana"]
+=======
+>>>>>>> main
 ```
 
 ## Text Shopping List With Quantities
@@ -154,14 +157,25 @@ shopping_cart = shopping_cart ++ [candies: 5]
 
 </details>
 
+<<<<<<< HEAD
 <!-- livebook:{"attrs":{"assertions":"list = [] ++ [milk: 1, eggs: 12]\nlist = list ++ [bars_of_butter: 2, candies: 10]\nlist = list -- [bars_of_butter: 2]\nlist = list -- [candies: 10]\nlist = list ++ [candies: 5]\n\nassert is_list(shopping_cart), \"Ensure shopping_list is still a list.\"\n\nassert shopping_cart == list","attempts":3,"code":"shopping_cart = []\nshopping_cart = shopping_cart ++ [milk: 1, eggs: 12]\nshopping_cart = shopping_cart ++ [bars_of_butter: 2, candies: 10]\nshopping_cart = shopping_cart -- [bars_of_butter: 2]\nshopping_cart = shopping_cart -- [candies: 10]\nshopping_cart = shopping_cart ++ [candies: 5]","solution":"","title":"Shopping Cart With Quantities"},"kind":"Elixir.TestedCell","livebook_object":"smart_cell"} -->
+=======
+```elixir
+
+```
+
+## Mark As Completed
+
+<!-- livebook:{"attrs":{"source":"file_name = Path.basename(Regex.replace(~r/#.+/, __ENV__.file, \"\"), \".livemd\")\n\nprogress_path = __DIR__ <> \"/../progress.json\"\nexisting_progress = File.read!(progress_path) |> Jason.decode!()\n\ndefault = Map.get(existing_progress, file_name, false)\n\nform =\n  Kino.Control.form(\n    [\n      completed: input = Kino.Input.checkbox(\"Mark As Completed\", default: default)\n    ],\n    report_changes: true\n  )\n\nTask.async(fn ->\n  for %{data: %{completed: completed}} <- Kino.Control.stream(form) do\n    File.write!(progress_path, Jason.encode!(Map.put(existing_progress, file_name, completed)))\n  end\nend)\n\nform","title":"Track Your Progress"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+>>>>>>> main
 
 ```elixir
-ExUnit.start(auto_run: false)
+file_name = Path.basename(Regex.replace(~r/#.+/, __ENV__.file, ""), ".livemd")
 
-defmodule Assertion do
-  use ExUnit.Case
+progress_path = __DIR__ <> "/../progress.json"
+existing_progress = File.read!(progress_path) |> Jason.decode!()
 
+<<<<<<< HEAD
   test "Shopping Cart With Quantities" do
     try do
       Process.flag(:trap_exit, true)
@@ -176,9 +190,19 @@ defmodule Assertion do
       list = list -- [bars_of_butter: 2]
       list = list -- [candies: 10]
       list = list ++ [candies: 5]
+=======
+default = Map.get(existing_progress, file_name, false)
+>>>>>>> main
 
-      assert is_list(shopping_cart), "Ensure shopping_list is still a list."
+form =
+  Kino.Control.form(
+    [
+      completed: input = Kino.Input.checkbox("Mark As Completed", default: default)
+    ],
+    report_changes: true
+  )
 
+<<<<<<< HEAD
       assert shopping_cart == list
     catch
       error ->
@@ -222,9 +246,15 @@ defmodule Assertion do
       Kino.render(Kino.Markdown.new("### Test Results 
 <hr/>"))
     end
+=======
+Task.async(fn ->
+  for %{data: %{completed: completed}} <- Kino.Control.stream(form) do
+    File.write!(progress_path, Jason.encode!(Map.put(existing_progress, file_name, completed)))
+>>>>>>> main
   end
-end
+end)
 
+<<<<<<< HEAD
 ExUnit.run()
 
 # Make variables and modules defined in the test available.
@@ -236,6 +266,9 @@ shopping_cart = shopping_cart ++ [bars_of_butter: 2, candies: 10]
 shopping_cart = shopping_cart -- [bars_of_butter: 2]
 shopping_cart = shopping_cart -- [candies: 10]
 shopping_cart = shopping_cart ++ [candies: 5]
+=======
+form
+>>>>>>> main
 ```
 
 ## Commit Your Progress
@@ -244,18 +277,20 @@ Run the following in your command line from the curriculum folder to track and s
 Ensure that you do not already have undesired or unrelated changes by running `git status` or by checking the source control tab in Visual Studio Code.
 
 ```
-$ git checkout main
-$ git checkout -b exercise-shopping_list
+$ git checkout solutions
+$ git checkout -b shopping-list-exercise
 $ git add .
 $ git commit -m "finish shopping list exercise"
-$ git push origin exercise-shopping_list
+$ git push origin shopping-list-exercise
 ```
 
-Create a pull request to your forked `main` branch. Please do not create a pull request to the DockYard Academy repository as this will spam our PR tracker.
+Create a pull request from your `shopping-list-exercise` branch to your `solutions` branch.
+Please do not create a pull request to the DockYard Academy repository as this will spam our PR tracker.
 
 **DockYard Academy Students Only:**
 
 Notify your teacher by including `@BrooklinJazz` in your PR description to get feedback.
+You (or your teacher) may merge your PR into your solutions branch after review.
 
 If you are interested in joining the next academy cohort, [sign up here](https://academy.dockyard.com/) to receive more news when it is available.
 

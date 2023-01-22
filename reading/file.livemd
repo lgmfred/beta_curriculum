@@ -2,7 +2,8 @@
 
 ```elixir
 Mix.install([
-  {:kino, "~> 0.7.0", override: true},
+  {:jason, "~> 1.4"},
+  {:kino, "~> 0.8.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
   {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
@@ -16,6 +17,11 @@ Mix.install([
 ## Setup
 
 Ensure you type the `ea` keyboard shortcut to evaluate all Elixir cells before starting. Alternatively you can evaluate the Elixir cells as you read.
+
+## Review Questions
+
+* How can you use the file system for long-term persistence and retrieval of elixir terms?
+* What is the absolute and relative **path**?
 
 ## Persistence
 
@@ -134,8 +140,8 @@ File.exists?("file.txt")
 
 Experiment with the functions above. Refer to the documentation for examples you can try.
 
-<div style="background-color: lightcoral; font-weight: bold; padding: 1rem; color: black; margin: 1rem 0;">
-DO NOT DELETE IMPORTANT FILES ON YOUR SYSTEM WHEN USING [File.rm/1](https://hexdocs.pm/elixir/File.html#rm/1) or [File.write/3](https://hexdocs.pm/elixir/File.html#write/3).
+<div style="background-color: lightcoral; font-weight: bold; padding: 1rem; color: white; margin: 1rem 0;">
+DO NOT DELETE IMPORTANT FILES ON YOUR SYSTEM WHEN USING THE FILE MODULE
 </div>
 
 ```elixir
@@ -316,7 +322,7 @@ File.close(file)
 File.rm!("open_close.txt")
 ```
 
-[IO.read/2](https://hexdocs.pm/elixir/IO.html#read/2) writes over the entire content of the file. We need to open the file with the `:write` option to enable write permission.
+[IO.write/2](https://hexdocs.pm/elixir/IO.html#write/2) writes over the entire content of the file. We need to open the file with the `:write` option to enable write permission.
 
 ```elixir
 File.write!("open_close.txt", content)
@@ -335,7 +341,40 @@ File.rm!("open_close.txt")
 
 ## Further Reading
 
+Consider the following resources to deepen your understanding of the topic.
+
+* [HexDocs: File](https://hexdocs.pm/elixir/1.12/File.html)
+* [Elixir-lang: IO and the file system](https://elixir-lang.org/getting-started/io-and-the-file-system.html)
 * [Exercism: File](https://exercism.org/tracks/elixir/concepts/file)
+
+## Mark As Completed
+
+<!-- livebook:{"attrs":{"source":"file_name = Path.basename(Regex.replace(~r/#.+/, __ENV__.file, \"\"), \".livemd\")\n\nprogress_path = __DIR__ <> \"/../progress.json\"\nexisting_progress = File.read!(progress_path) |> Jason.decode!()\n\ndefault = Map.get(existing_progress, file_name, false)\n\nform =\n  Kino.Control.form(\n    [\n      completed: input = Kino.Input.checkbox(\"Mark As Completed\", default: default)\n    ],\n    report_changes: true\n  )\n\nTask.async(fn ->\n  for %{data: %{completed: completed}} <- Kino.Control.stream(form) do\n    File.write!(progress_path, Jason.encode!(Map.put(existing_progress, file_name, completed)))\n  end\nend)\n\nform","title":"Track Your Progress"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+
+```elixir
+file_name = Path.basename(Regex.replace(~r/#.+/, __ENV__.file, ""), ".livemd")
+
+progress_path = __DIR__ <> "/../progress.json"
+existing_progress = File.read!(progress_path) |> Jason.decode!()
+
+default = Map.get(existing_progress, file_name, false)
+
+form =
+  Kino.Control.form(
+    [
+      completed: input = Kino.Input.checkbox("Mark As Completed", default: default)
+    ],
+    report_changes: true
+  )
+
+Task.async(fn ->
+  for %{data: %{completed: completed}} <- Kino.Control.stream(form) do
+    File.write!(progress_path, Jason.encode!(Map.put(existing_progress, file_name, completed)))
+  end
+end)
+
+form
+```
 
 ## Commit Your Progress
 
@@ -343,23 +382,25 @@ Run the following in your command line from the curriculum folder to track and s
 Ensure that you do not already have undesired or unrelated changes by running `git status` or by checking the source control tab in Visual Studio Code.
 
 ```
-$ git checkout main
-$ git checkout -b exercise-file
+$ git checkout solutions
+$ git checkout -b file-reading
 $ git add .
-$ git commit -m "finish file section"
-$ git push origin exercise-file
+$ git commit -m "finish file reading"
+$ git push origin file-reading
 ```
 
-Create a pull request to your forked `main` branch. Please do not create a pull request to the DockYard Academy repository as this will spam our PR tracker.
+Create a pull request from your `file-reading` branch to your `solutions` branch.
+Please do not create a pull request to the DockYard Academy repository as this will spam our PR tracker.
 
 **DockYard Academy Students Only:**
 
 Notify your teacher by including `@BrooklinJazz` in your PR description to get feedback.
+You (or your teacher) may merge your PR into your solutions branch after review.
 
 If you are interested in joining the next academy cohort, [sign up here](https://academy.dockyard.com/) to receive more news when it is available.
 
 ## Up Next
 
-| Previous                                                       | Next                                           |
-| -------------------------------------------------------------- | ---------------------------------------------: |
-| [Fibonacci Challenge](../exercises/fibonacci_challenge.livemd) | [File Drills](../exercises/file_drills.livemd) |
+| Previous                                                       | Next                                    |
+| -------------------------------------------------------------- | --------------------------------------: |
+| [Fibonacci Challenge](../exercises/fibonacci_challenge.livemd) | [File](../exercises/file_drills.livemd) |

@@ -2,7 +2,8 @@
 
 ```elixir
 Mix.install([
-  {:kino, "~> 0.7.0", override: true},
+  {:jason, "~> 1.4"},
+  {:kino, "~> 0.8.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
   {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
@@ -17,7 +18,7 @@ Mix.install([
 
 You're going to build an app to convert metric measurements such as **millimeters**, **centimeters**, **meters**, and **kilometers** according to the following table.
 
-<!-- livebook:{"attrs":{"source":"[\n  [unit: :millimeter, value: 1, meter: 0.001],\n  [unit: :centimeter, value: 1, meter: 0.01],\n  [unit: :meter, value: 1, meter: 1],\n  [unit: :kilometer, value: 1, meter: 1000],\n] |> Kino.DataTable.new()","title":"Metric Conversion Table"},"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":{"source":"[\n  [unit: :millimeter, value: 1, meter: 0.001],\n  [unit: :centimeter, value: 1, meter: 0.01],\n  [unit: :meter, value: 1, meter: 1],\n  [unit: :kilometer, value: 1, meter: 1000],\n] |> Kino.DataTable.new()","title":"Metric Conversion Table"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 [
@@ -27,10 +28,6 @@ You're going to build an app to convert metric measurements such as **millimeter
   [unit: :kilometer, value: 1, meter: 1000]
 ]
 |> Kino.DataTable.new()
-```
-
-```elixir
-1000 * 0.01 / 1000
 ```
 
 Users provide values using `{from_unit, value}` tuples, and the desired unit to convert to.
@@ -90,7 +87,7 @@ defmodule Metric do
     0.01
 
     iex> Metric.convert({:millimeter, 10}, :centimeter)
-    1
+    1.0
 
     iex> Metric.convert({:kilometer, 10}, :centimeter)
     1000000
@@ -100,29 +97,60 @@ defmodule Metric do
 end
 ```
 
+## Mark As Completed
+
+<!-- livebook:{"attrs":{"source":"file_name = Path.basename(Regex.replace(~r/#.+/, __ENV__.file, \"\"), \".livemd\")\n\nprogress_path = __DIR__ <> \"/../progress.json\"\nexisting_progress = File.read!(progress_path) |> Jason.decode!()\n\ndefault = Map.get(existing_progress, file_name, false)\n\nform =\n  Kino.Control.form(\n    [\n      completed: input = Kino.Input.checkbox(\"Mark As Completed\", default: default)\n    ],\n    report_changes: true\n  )\n\nTask.async(fn ->\n  for %{data: %{completed: completed}} <- Kino.Control.stream(form) do\n    File.write!(progress_path, Jason.encode!(Map.put(existing_progress, file_name, completed)))\n  end\nend)\n\nform","title":"Track Your Progress"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+
+```elixir
+file_name = Path.basename(Regex.replace(~r/#.+/, __ENV__.file, ""), ".livemd")
+
+progress_path = __DIR__ <> "/../progress.json"
+existing_progress = File.read!(progress_path) |> Jason.decode!()
+
+default = Map.get(existing_progress, file_name, false)
+
+form =
+  Kino.Control.form(
+    [
+      completed: input = Kino.Input.checkbox("Mark As Completed", default: default)
+    ],
+    report_changes: true
+  )
+
+Task.async(fn ->
+  for %{data: %{completed: completed}} <- Kino.Control.stream(form) do
+    File.write!(progress_path, Jason.encode!(Map.put(existing_progress, file_name, completed)))
+  end
+end)
+
+form
+```
+
 ## Commit Your Progress
 
 Run the following in your command line from the curriculum folder to track and save your progress in a Git commit.
 Ensure that you do not already have undesired or unrelated changes by running `git status` or by checking the source control tab in Visual Studio Code.
 
 ```
-$ git checkout main
-$ git checkout -b exercise-metric_conversion
+$ git checkout solutions
+$ git checkout -b metric-conversion-exercise
 $ git add .
 $ git commit -m "finish metric conversion exercise"
-$ git push origin exercise-metric_conversion
+$ git push origin metric-conversion-exercise
 ```
 
-Create a pull request to your forked `main` branch. Please do not create a pull request to the DockYard Academy repository as this will spam our PR tracker.
+Create a pull request from your `metric-conversion-exercise` branch to your `solutions` branch.
+Please do not create a pull request to the DockYard Academy repository as this will spam our PR tracker.
 
 **DockYard Academy Students Only:**
 
 Notify your teacher by including `@BrooklinJazz` in your PR description to get feedback.
+You (or your teacher) may merge your PR into your solutions branch after review.
 
 If you are interested in joining the next academy cohort, [sign up here](https://academy.dockyard.com/) to receive more news when it is available.
 
 ## Up Next
 
-| Previous                                                         | Next                               |
-| ---------------------------------------------------------------- | ---------------------------------: |
-| [RPS Pattern Matching](../exercises/rps_pattern_matching.livemd) | [Guards](../reading/guards.livemd) |
+| Previous                                                                         | Next                               |
+| -------------------------------------------------------------------------------- | ---------------------------------: |
+| [Rock Paper Scissors Pattern Matching](../exercises/rps_pattern_matching.livemd) | [Guards](../reading/guards.livemd) |

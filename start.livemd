@@ -22,9 +22,9 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Git](reading/git.livemd)
   * [Livebook](reading/livebook.livemd)
   * [Code Editors](reading/code_editors.livemd)
+  * [IEx](reading/iex.livemd)
 * Exercises
   * [Command Line Family Tree](exercises/command_line_family_tree.livemd)
-  * [Livebook Recovery](exercises/livebook_recovery.livemd)
   * [GitHub Engineering Journal](exercises/github_engineering_journal.livemd)
   * [GitHub Collab](exercises/github_collab.livemd)
 
@@ -36,6 +36,7 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Comments](reading/comments.livemd)
   * [Arithmetic](reading/arithmetic.livemd)
   * [Strings](reading/strings.livemd)
+  * [IO](reading/io.livemd)
   * [Booleans](reading/booleans.livemd)
   * [Comparison Operators](reading/comparison_operators.livemd)
   * [Match Operator](reading/match_operator.livemd)
@@ -71,7 +72,6 @@ If you do not see the box above, or if you encounter any issues with this course
 * Exercises
   * [Naming Numbers](exercises/naming_numbers.livemd)
   * [Rock Paper Scissors](exercises/rock_paper_scissors.livemd)
-    <!-- * Drill: [Replace `nil`s](exercises/drill-func-replace-nils.livemd) -->
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -98,7 +98,6 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Counting Votes](exercises/counting_votes.livemd)
   * Bonus: [Measurements](exercises/measurements.livemd)
   * Bonus: [A Safe Range](exercises/saferange.livemd)
-  * Drill: [Replace `nil`s](exercises/drill-enum1-replace-nils.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -112,7 +111,6 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Anagram](exercises/anagram.livemd)
   * [Animal Generator](exercises/animal_generator.livemd)
   * [Book Search](exercises/book_search.livemd)
-  * Drill: [Replace `nil`s](exercises/drill-enum2-replace-nils.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -134,7 +132,6 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Number Finder](exercises/number_finder.livemd)
   * [Weighted Voting](exercises/weighted_voting.livemd)
   * [Custom Enum With Reduce](exercises/custom_enum_with_reduce.livemd)
-  * Drill: [Replace `nil`s](exercises/drill-reduce-replace-nils.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -146,30 +143,6 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Time Converting](exercises/time_converting.livemd)
   * [Itinerary](exercises/itinerary.livemd)
   * [Timeline](exercises/timeline.livemd)
-
-<!-- livebook:{"break_markdown":true} -->
-
-### Advanced Pattern Matching
-
-* Reading
-  * [Polymorphism](reading/polymorphism.livemd)
-  * [Advanced Pattern Matching](reading/advanced_pattern_matching.livemd)
-* Exercises
-  * [Treasure Matching](exercises/treasure_matching.livemd)
-  * [Rock Paper Scissors Pattern Matching](exercises/rps_pattern_matching.livemd)
-  * [Metric Conversion](exercises/metric_conversion.livemd)
-  * Drill: [Replace `nil`s](exercises/drill-patternmatching-replace-nils.livemd)
-
-<!-- livebook:{"break_markdown":true} -->
-
-### Guards
-
-* Reading
-  * [Guards](reading/guards.livemd)
-* Exercises
-  * [Message Validation](exercises/message_validation.livemd)
-  * [Math With Guards](exercises/math_with_guards.livemd)
-  * [Rock Paper Scissors Guards](exercises/rps_guards.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -189,9 +162,7 @@ If you do not see the box above, or if you encounter any issues with this course
 ### Elixir Build Tooling
 
 * Reading
-  * [IEx](reading/iex.livemd)
   * [Mix](reading/mix.livemd)
-  * [IO](reading/io.livemd)
 * Exercises
   * [Games: Setup](exercises/games_setup.livemd)
   * [Games: Guessing Game](exercises/games_guessing_game.livemd)
@@ -241,6 +212,29 @@ If you do not see the box above, or if you encounter any issues with this course
   * [Games: Menu](exercises/games_menu.livemd)
 
 ## OTP and Advanced Syntax
+
+### Advanced Pattern Matching
+
+* Reading
+  * [Advanced Pattern Matching](reading/advanced_pattern_matching.livemd)
+* Exercises
+  * [Treasure Matching](exercises/treasure_matching.livemd)
+  * [Replacing nils](exercises/drill-patternmatching-replace-nils.livemd)
+  * [Rock Paper Scissors Pattern Matching](exercises/rps_pattern_matching.livemd)
+  * Bonus: [Metric Conversion](exercises/metric_conversion.livemd)
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Guards
+
+* Reading
+  * [Guards](reading/guards.livemd)
+* Exercises
+  * [Message Validation](exercises/message_validation.livemd)
+  * [Math With Guards](exercises/math_with_guards.livemd)
+  * [Rock Paper Scissors Guards](exercises/rps_guards.livemd)
+
+<!-- livebook:{"break_markdown":true} -->
 
 ### Protocols
 
@@ -353,7 +347,7 @@ If you do not see the box above, or if you encounter any issues with this course
 * Exercises
   * [Supervised Stack](exercises/supervised_stack.livemd)
   * [Dominoes](exercises/dominoes.livemd)
-  * [Monster Spawner](exercises/creature_spawner.livemd)
+  * [Monster Spawner](exercises/monster_spawner.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -372,12 +366,12 @@ If you do not see the box above, or if you encounter any issues with this course
 * Reading
   * [Metaprogramming](reading/metaprogramming.livemd)
 * Exercises
-  * [Macro Math](exercises/macro_math.livemd)
+  * [Meta Math](exercises/meta_math.livemd)
   * [Custom Assertions](exercises/custom_assertions.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
-### Mix Projects & Processes
+### Mix Projects and Processes
 
 * Reading
   * [Supervised Mix Project](reading/supervised_mix_project.livemd)
@@ -403,8 +397,6 @@ If you do not see the box above, or if you encounter any issues with this course
 
 * Reading
   * [State: Agent and ETS](reading/agents_and_ets.livemd)
-  * [Elixir-lang: Agents](https://elixir-lang.org/getting-started/mix-otp/agent.html)
-  * [HexDocs: Agents](https://hexdocs.pm/elixir/Agent.html)
 * Exercises
   * [Agent Journal](exercises/agent_journal.livemd)
   * [ETS Warehouse](exercises/inventory_management.livemd)
@@ -415,6 +407,12 @@ If you do not see the box above, or if you encounter any issues with this course
 ### Rubix Cube Project
 
 * [Rubix Cube](exercises/rubix_cube.livemd)
+
+## Capstone Project Preparation
+
+### Capstone Project
+
+* [Captone Project Guide](reading/capstone_project_guide.livemd)
 
 ## Web Servers and Phoenix
 
@@ -430,7 +428,7 @@ If you do not see the box above, or if you encounter any issues with this course
 
 <!-- livebook:{"break_markdown":true} -->
 
-### APIs & Parsing JSON
+### APIs and Parsing JSON
 
 * Reading
   * [APIs](reading/apis.livemd)
@@ -498,9 +496,9 @@ If you do not see the box above, or if you encounter any issues with this course
 ### Schemas and Migrations
 
 * Reading
-  * [Schemas and Migrations](./reading/schemas_and_migrations.livemd)
+  * [Schemas and Migrations](reading/schemas_and_migrations.livemd)
 * Exercises
-  * [Blog: Migration](./exercises/blog_migration.livemd)
+  * [Blog: Migration](exercises/blog_migration.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -570,13 +568,13 @@ If you do not see the box above, or if you encounter any issues with this course
 ### LiveView
 
 * Reading
-  * [LiveView Counter](reading/liveview.livemd)
+  * [LiveView](reading/liveview.livemd)
 * Exercises
   * [Math Game](exercises/math_game.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
-### LiveView & Ecto
+### LiveView and Ecto
 
 * Instruction
   * [PicChat: Messages](reading/pic_chat_messages.livemd)
@@ -586,78 +584,25 @@ If you do not see the box above, or if you encounter any issues with this course
 ### LiveView Image Uploads
 
 * Instruction
-  * [PicChat: Image Uploads]
+  * [PicChat: Image Upload](reading/pic_chat_image_upload.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
-### Testing LiveView
+### PubSub
 
-* Reading
-  * [Hexdocs: Phoenix.LiveViewTest](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveViewTest.html)
-* Exercises
-  * [Portfolio: Rubber Ducky](exercises/rubber_ducky.livemd)
+* Instruction
+  * [PicChat: PubSub](reading/pic_chat_pub_sub.livemd)
 
 <!-- livebook:{"break_markdown":true} -->
 
-### PubSub and Channels
+### LiveView JS Interoperability and Pagination
 
-* Reading
-  * PubSub and Channels
-* Exercises
-  * Portfolio: Chat
-
-<!-- livebook:{"break_markdown":true} -->
-
-### GraphQL and Absinthe
-
-* Reading
-  * GraphQL
-  * Absinthe
-* Exercises
-  * Recipe App
-  * Music Search App w/ GraphQL
-
-## Capstone Project Preparation
-
-### Capstone Project
-
-* Captone Project Guide
-
-## Quality Assurance
-
-### Observability
-
-* Reading
-  * Telemetry
-  * Live Dashboard
-  * Flame On
-* Exercises
-  * Portfolio: Add Observability
-
-<!-- livebook:{"break_markdown":true} -->
-
-### Factories & Mocks
-
-* Reading
-  * Factories with ExMachina
-  * Mocks with Mox
-* Exercises
-  * Portfolio: Character Factory
+* Instruction
+  * [PicChat: Infinite Scroll](reading/pic_chat_infinite_scroll.livemd)
 
 ## External Libraries
 
-### Emailing & Swoosh
+### Emailing, Swoosh, and Oban
 
-* Reading
-* Exercises
-  * Portfolio: Contact Form
-
-<!-- livebook:{"break_markdown":true} -->
-
-### Oban
-
-## Final Project
-
-### Demo Day
-
-* Demo Day Preparation
+* Instruction
+  * [Newsletter](reading/newsletter.livemd)

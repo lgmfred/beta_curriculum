@@ -195,8 +195,6 @@ The curriculum is still a rough outline subject to change and feedback. see [sta
 * Built-in Modules
 * Reduce
 * Dates and Time
-* Advanced Pattern Matching
-* Guards
 * String Manipulation
 ## Mix Projects
 * Elixir Build Tooling
@@ -205,6 +203,8 @@ The curriculum is still a rough outline subject to change and feedback. see [sta
 * Documentation and Static Analysis
 * Executables
 ## OTP and Advanced Syntax
+* Advanced Pattern Matching
+* Guards
 * Protocols
 * Recursion
 * Benchmarking and Performance
@@ -217,13 +217,15 @@ The curriculum is still a rough outline subject to change and feedback. see [sta
 * Supervisor Basics and Fault Tolerance
 * Testing GenServers
 * Metaprogramming
-* Mix Projects & Processes
+* Mix Projects and Processes
 * Concurrency With Tasks
 * State Management With Agents and ETS
 * Rubix Cube Project
+## Capstone Project Preparation
+* Capstone Project
 ## Web Servers and Phoenix
 * HTML and CSS
-* APIs & Parsing JSON
+* APIs and Parsing JSON
 * Phoenix
 * Tailwind
 * Ecto Changesets
@@ -239,19 +241,10 @@ The curriculum is still a rough outline subject to change and feedback. see [sta
 * Deployment
 ## LiveView
 * LiveView
-* LiveView & Ecto
+* LiveView and Ecto
 * LiveView Image Uploads
-* Testing LiveView
-* PubSub and Channels
-* GraphQL and Absinthe
-## Capstone Project Preparation
-* Capstone Project
-## Quality Assurance
-* Observability
-* Factories & Mocks
+* PubSub
+* LiveView JS Interoperability and Pagination
 ## External Libraries
-* Emailing & Swoosh
-* Oban
-## Final Project
-* Demo Day
+* Emailing, Swoosh, and Oban
 <!-- course-outline-end -->
