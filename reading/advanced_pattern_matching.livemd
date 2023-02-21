@@ -23,7 +23,7 @@ Ensure you type the `ea` keyboard shortcut to evaluate all Elixir cells before s
 Upon completing this lesson, a student should understand:
 
 * How to achieve polymorphism with multiple function heads and case statements.
-* How to simpify our program's control-flow using polymorphism.
+* How to simplify our program's control-flow using polymorphism.
 * How to use pattern matching with enumeration.
 
 ## Overview
@@ -140,7 +140,12 @@ We can use the match operator anytime we have a value bound to a parameter or va
 Create a `case` statement that will return the first element in a 2 element tuple, or the first element in 2 element a list.
 
 ```elixir
+data_structure = [1, 2]
 
+case data_structure do
+  {elem1, _elem2} -> elem1
+  [elem1, _elem2] -> elem1
+end
 ```
 
 Use pattern matching to ensure the `Check.must_have_elements!/1` function returns true when called with a list that has more than one element and otherwise causes a [FunctionClauseError](https://hexdocs.pm/elixir/FunctionClauseError.html).
@@ -174,7 +179,7 @@ defmodule Check do
       iex> Check.must_have_elements!([])
       ** (FunctionClauseError) no function clause matching in Check.must_have_elements!/1
   """
-  def must_have_elements!(list) do
+  def must_have_elements!([_head | _tail] = _list) do
     true
   end
 end
@@ -279,8 +284,9 @@ defmodule Greeter do
       iex> Greeter.hello(["Swamy", "Jeff", "Jeremy"])
       "Hello everyone!"
   """
-  def hello(names) do
-  end
+  def hello([person]), do: "Hi #{person}!"
+  def hello([person1, person2]), do: "Hi #{person1}, Hello #{person2}!"
+  def hello([_, _, _ | _tail]), do: "Hello everyone!"
 end
 ```
 
@@ -329,6 +335,19 @@ defmodule Converter do
 
   """
   def to_named_strings(integers) do
+    Enum.map(integers, fn
+      0 -> "zero"
+      1 -> "one"
+      2 -> "two"
+      3 -> "three"
+      4 -> "four"
+      5 -> "five"
+      6 -> "six"
+      7 -> "seven"
+      8 -> "eight"
+      9 -> "nine"
+      10 -> "ten"
+    end)
   end
 end
 ```
@@ -356,7 +375,11 @@ end)
 </details>
 
 ```elixir
-
+[{:double, 2}, {:halve, 10}, {:double, 4}]
+|> Enum.map(fn
+  {:double, int} -> int * 2
+  {:halve, int} -> div(int, 2)
+end)
 ```
 
 ## Pattern Matching Vs. If
@@ -525,7 +548,7 @@ actual = {"hello", "hi"}
 expected = {"hello"}
 actual = {"hello", "hi"}
 
-expected = actual
+^expected = actual
 ```
 
 ## Further Reading
