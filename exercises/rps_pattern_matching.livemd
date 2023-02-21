@@ -72,6 +72,7 @@ defmodule RockPaperScissorsPatternMatching do
   @moduledoc """
   Documentation for `RockPaperScissorsPatternMatching`
   """
+  @type choice :: :rock | :paper | :scissors
 
   @doc """
   Play rock paper scissors. Returns a string to describe who won the game.
@@ -105,8 +106,14 @@ defmodule RockPaperScissorsPatternMatching do
     iex> RockPaperScissorsPatternMatching.play(:scissors, :scissors)
     "draw!"
   """
-  def play(guess1, guess2) do
-  end
+  @spec play(choice, choice) :: String.t()
+  def play(_choice, _choice), do: "draw!"
+  def play(:rock, :paper), do: "paper beats rock!"
+  def play(:rock, :scissors), do: "rock beats scissors!"
+  def play(:paper, :rock), do: "paper beats rock!"
+  def play(:paper, :scissors), do: "scissors beats paper!"
+  def play(:scissors, :paper), do: "scissors beats paper!"
+  def play(:scissors, :rock), do: "rock beats scissors!"
 end
 ```
 
