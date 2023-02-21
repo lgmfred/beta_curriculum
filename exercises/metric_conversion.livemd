@@ -46,6 +46,8 @@ defmodule Metric do
   @moduledoc """
   Documentation for `Metric`
   """
+  @type unit :: :millimeter | :centimeter | :meter | :kilometer
+  @type from :: {unit, integer}
 
   @doc """
   Convert one measurement to another.
@@ -65,7 +67,7 @@ defmodule Metric do
     1.0
 
     iex> Metric.convert({:kilometer, 1}, :meter)
-    1000
+    1000.0
 
     Convert meters to unit.
 
@@ -90,10 +92,23 @@ defmodule Metric do
     1.0
 
     iex> Metric.convert({:kilometer, 10}, :centimeter)
-    1000000
+    1000000.0
   """
+  @spec convert(from, unit) :: float()
   def convert(from, to) do
+    {to, to_meter(from)}
+    |> from_meter()
   end
+
+  defp to_meter({:meter, int}), do: int * 1.0
+  defp to_meter({:kilometer, int}), do: int * 1000.0
+  defp to_meter({:centimeter, int}), do: int * 0.01
+  defp to_meter({:millimeter, int}), do: int * 0.001
+
+  defp from_meter({:meter, int}), do: int
+  defp from_meter({:kilometer, int}), do: int / 1000
+  defp from_meter({:centimeter, int}), do: int / 0.01
+  defp from_meter({:millimeter, int}), do: int / 0.001
 end
 ```
 
