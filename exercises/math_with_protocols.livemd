@@ -95,16 +95,6 @@ end
 Define implementations for the `Math` protocol as documented below.
 
 ```elixir
-defmodule MyStruct do
-  defstruct [:name]
-end
-```
-
-```elixir
-Map.replace!(%MyStruct{}, :name, "hello")
-```
-
-```elixir
 defprotocol Math do
   @doc """
   Add two integers, lists, or strings.
@@ -161,6 +151,29 @@ defprotocol Math do
     ** (Protocol.UndefinedError) protocol Math not implemented for 1.0 of type Float
   """
   def subtract(value1, value2)
+end
+
+## Impl
+defimpl Math, for: Integer do
+  def add(int1, int2), do: int1 + int2
+  def subtract(int1, int2), do: int1 - int2
+end
+
+defimpl Math, for: List do
+  def add(list1, list2), do: list1 ++ list2
+  def subtract(list1, list2), do: list1 -- list2
+end
+
+defimpl Math, for: BitString do
+  def add(string1, string2), do: string1 <> string2
+
+  def subtract(string1, string2) do
+    list1 = String.split(string1, "", trim: true)
+    list2 = String.split(string2, "", trim: true)
+
+    (list1 -- list2)
+    |> List.to_string()
+  end
 end
 ```
 
