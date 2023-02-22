@@ -59,6 +59,11 @@ defmodule RockPaperScissorsGuards do
   @moduledoc """
   Documentation for `RockPaperScissorsGuards`
   """
+  @type choice :: :rock | :paper | :scissors
+  @wins [{:rock, :scissors}, {:scissors, :paper}, {:paper, :rock}]
+
+  defguard wins?(choice1, choice2)
+           when {choice1, choice2} in @wins
 
   @doc """
   Play rock paper scissors. Returns a string to describe who won the game.
@@ -92,7 +97,15 @@ defmodule RockPaperScissorsGuards do
     iex> RockPaperScissorsGuards.play(:scissors, :scissors)
     "draw!"
   """
-  def play(guess1, guess2) do
+  @spec play(choice, choice) :: String.t()
+  def play(guess1, guess2) when guess1 == guess2, do: "draw!"
+
+  def play(guess1, guess2) when wins?(guess1, guess2) do
+    "#{guess1} beats #{guess2}!"
+  end
+
+  def play(guess1, guess2) when wins?(guess2, guess1) do
+    "#{guess2} beats #{guess1}!"
   end
 end
 ```

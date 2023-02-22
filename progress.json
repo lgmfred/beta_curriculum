@@ -183,7 +183,7 @@
   "built-in_modules_reading": false,
   "rps_pattern_matching_exercise": true,
   "arithmetic_reading": true,
-  "rps_guards_exercise": false,
+  "rps_guards_exercise": true,
   "book_search_tags_reading": false,
   "email_validation_exercise": true,
   "custom_enum_with_reduce_exercise": true,
