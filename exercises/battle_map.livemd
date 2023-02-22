@@ -130,6 +130,23 @@ defprotocol Character do
   def can_attack?(character, origin, target)
 end
 
+defimpl Character, for: Wizard do
+  def can_attack?(_character, {xo, yo}, {x, y}) do
+    ## Conditions to return true
+    # - straight vertical or horizontal lines (xo == x or yo == y)
+    # - diagonal lines (|(y-yo) / (x - xo)| == 1) y= mx +c 
+    xo == x or yo == y or abs((xo - x) / (yo - y)) == 1
+  end
+end
+
+defimpl Character, for: Barbarian do
+  def can_attack?(_character, {xo, yo}, {x, y}) do
+    ## Conditions to return true
+    # - both xo and yo must not be greater than or less by 2
+    abs(yo - y) <= 2 and abs(xo - x) <= 2
+  end
+end
+
 ExUnit.start(auto_run: false)
 
 defmodule CharacterTests do
@@ -181,7 +198,7 @@ ExUnit.run()
 
 ## Custom Character (BONUS)
 
-Create your own customer character with an attack pattern than you decide on. It should not
+Create your own customer character with an attack pattern that you decide on. It should not
 match the existing characters.
 
 For example, you might create an `Archer` who can only attack in a 3 radius square.
@@ -198,7 +215,33 @@ true
 Implement your custom character below.
 
 ```elixir
+defmodule Zande do
+  defstruct []
+end
 
+defimpl Character, for: Zande do
+  @doc """
+  The Zande hate Wizard and Barbarian tactics (so they just want to 
+  negate whatever those two do)
+
+  ## Examples
+
+    iex> Character.can_attack?(%Zande{}, {4, 4}, {6, 6})
+    false
+
+    iex> Character.can_attack?(%Zande{}, {4, 4}, {7, 7})
+    false
+  """
+  def can_attack?(_character, {xo, yo}, {x, y}) do
+    ## Conditions to return true
+    # - Everything that's not a Wizard or a Barbarian
+
+    ## Let me just do this (out of pure untapped lazyness)
+    wizard = Character.can_attack?(%Wizard{}, {xo, yo}, {x, y})
+    barbarian = Character.can_attack?(%Barbarian{}, {xo, yo}, {x, y})
+    not barbarian and not wizard
+  end
+end
 ```
 
 ## Mark As Completed
