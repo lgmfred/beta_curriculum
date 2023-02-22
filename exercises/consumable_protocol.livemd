@@ -46,10 +46,17 @@ end
 Enter your solution below.
 
 ```elixir
-
+defmodule Character do
+  defstruct strength: 10,
+            dexterity: 10,
+            constitution: 10,
+            wisdom: 10,
+            intelligence: 10,
+            charisma: 10
+end
 ```
 
-Our game has `Consumable` items when modify a character's base stats. For example, we'll have
+Our game has `Consumable` items when modifying a character's base stats. For example, we'll have
 a `StrengthPotion` struct which will increase a `Character`'s strength based on the `:level` key.
 
 Define item structs with the following keys and default values.
@@ -110,7 +117,29 @@ end
 Enter your solution below.
 
 ```elixir
-Enum.map("abc", fn char -> char end)
+defmodule StrengthPotion do
+  defstruct level: 1
+end
+
+defmodule ConstitutionPotion do
+  defstruct level: 1
+end
+
+defmodule DexterityPotion do
+  defstruct level: 1
+end
+
+defmodule WisdomPotion do
+  defstruct level: 1
+end
+
+defmodule IntelligencePotion do
+  defstruct level: 1
+end
+
+defmodule CharismaPotion do
+  defstruct level: 1
+end
 ```
 
 To make our system extendable, we'll have a `Consumable` protocol, and separate implementations for structs such as the `StrengthPotion`.
@@ -179,7 +208,66 @@ end
 </details>
 
 ```elixir
+defprotocol Consumable do
+  @doc """
 
+  ## Examples
+    iex> Consumable.consume(%StrengthPotion{level: 1}, %Character{})
+    %Character{strength: 11, dexterity: 10, constitution: 10, wisdom: 10, intelligence: 10, charisma: 10}
+
+    iex> Consumable.consume(%DexterityPotion{level: 2}, %Character{})
+    %Character{strength: 10, dexterity: 12, constitution: 10, wisdom: 10, intelligence: 10, charisma: 10}
+
+    iex> Consumable.consume(%ConstitutionPotion{level: 5}, %Character{})
+    %Character{strength: 10, dexterity: 10, constitution: 15, wisdom: 10, intelligence: 10, charisma: 10}
+
+    iex> Consumable.consume(%WisdomPotion{level: 3}, %Character{})
+    %Character{strength: 10, dexterity: 10, constitution: 10, wisdom: 13, intelligence: 10, charisma: 10}
+
+    iex> Consumable.consume(%IntelligencePotion{level: -7}, %Character{})
+    %Character{strength: 10, dexterity: 10, constitution: 10, wisdom: 10, intelligence: 3, charisma: 10}
+
+    iex> Consumable.consume(%CharismaPotion{level: 23}, %Character{})
+    %Character{strength: 10, dexterity: 10, constitution: 10, wisdom: 10, intelligence: 10, charisma: 33}
+  """
+  def consume(item, char_struct)
+end
+
+defimpl Consumable, for: StrengthPotion do
+  def consume(item, char_struct) do
+    %{char_struct | strength: char_struct.strength + item.level}
+  end
+end
+
+defimpl Consumable, for: DexterityPotion do
+  def consume(item, char_struct) do
+    %{char_struct | dexterity: char_struct.dexterity + item.level}
+  end
+end
+
+defimpl Consumable, for: ConstitutionPotion do
+  def consume(item, char_struct) do
+    %{char_struct | constitution: char_struct.constitution + item.level}
+  end
+end
+
+defimpl Consumable, for: WisdomPotion do
+  def consume(item, char_struct) do
+    %{char_struct | wisdom: char_struct.wisdom + item.level}
+  end
+end
+
+defimpl Consumable, for: IntelligencePotion do
+  def consume(item, char_struct) do
+    %{char_struct | intelligence: char_struct.intelligence + item.level}
+  end
+end
+
+defimpl Consumable, for: CharismaPotion do
+  def consume(item, char_struct) do
+    %{char_struct | charisma: char_struct.charisma + item.level}
+  end
+end
 ```
 
 ## Mark As Completed
