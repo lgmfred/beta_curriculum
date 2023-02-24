@@ -30,7 +30,7 @@ a[0] --> b[1] --> c[1] --> d[2] --> e[3] --> f[5] --> g[8] --> h[13] --> i[21] -
 
 <!-- livebook:{"break_markdown":true} -->
 
-It's created by taking the sum of the previous to numbers to get the next number.
+It's created by taking the sum of the previous two numbers to get the next number.
 
 So $fib(n) = fib(n-1) + fib(n - 2)$
 
@@ -89,8 +89,18 @@ defmodule Fibonacci do
     iex> Fibonacci.of(20)
     6765
   """
-  def of(n) do
-  end
+
+  @spec of(non_neg_integer()) :: non_neg_integer()
+  # ## Body recurssive solution
+  # def of(0), do: 0
+  # def of(1), do: 1
+  # def of(n), do: of(n - 1) + of(n - 2)
+
+  ## Tail recurssive solution (more performant)
+  def of(n), do: of(n, 0, 1)
+
+  def of(0, last, _previous), do: last
+  def of(n, last, previous), do: of(n - 1, last + previous, last)
 end
 ```
 
