@@ -157,7 +157,7 @@
   "supervisors_reading": false,
   "save_game_exercise": false,
   "document_tools_exercise": false,
-  "factorial_exercise": false,
+  "factorial_exercise": true,
   "livebook_reading": true,
   "filter_values_by_type_exercise": true,
   "book_search_exercise": false,
