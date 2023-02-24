@@ -155,7 +155,7 @@ You may need to click the **Connect** button to reconnect the Elixir runtime.
 #   end
 # end
 
-# Body.recursion([1,2,3])
+# Body.recursion([1, 2, 3])
 ```
 
 Make sure you comment out the code above, otherwise Livebook will keep disconnecting.
@@ -323,7 +323,14 @@ end
 </details>
 
 ```elixir
+defmodule CountDown do
+  def count(0), do: IO.puts(0)
 
+  def count(int) do
+    IO.puts(int)
+    count(int - 1)
+  end
+end
 ```
 
 ### Your Turn
@@ -385,7 +392,19 @@ end
 </details>
 
 ```elixir
+defmodule CountBetween do
+  def count(int, int), do: IO.puts(int)
 
+  def count(int1, int2) when int1 < int2 do
+    IO.puts(int1)
+    count(int1 + 1, int2)
+  end
+
+  def count(int1, int2) when int1 > int2 do
+    IO.puts(int1)
+    count(int1 - 1, int2)
+  end
+end
 ```
 
 ## Mark As Completed
