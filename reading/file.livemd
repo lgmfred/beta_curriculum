@@ -127,7 +127,7 @@ File.ls()
 To clean up the file, uncomment the following code which should remove it.
 
 ```elixir
-# File.rm("file.txt")
+File.rm("file.txt")
 ```
 
 Now the file should no longer exist. Let's check with [File.exists?/2](https://hexdocs.pm/elixir/File.html#exists?/2).
@@ -145,7 +145,14 @@ DO NOT DELETE IMPORTANT FILES ON YOUR SYSTEM WHEN USING THE FILE MODULE
 </div>
 
 ```elixir
-
+File.write!("lgmfred.txt", "Le grand monsieur")
+File.ls!()
+File.read!("lgmfred.txt")
+File.ls!()
+File.rm!("lgmfred.txt")
+File.ls!()
+File.exists?("lgmfred.txt")
+File.exists?("start.livemd")
 ```
 
 ## Path Module Functions
@@ -185,7 +192,10 @@ Path.join(path1, path2)
 Experiment with the functions above. Refer to the documentation for examples you can try.
 
 ```elixir
-
+Path.join("some/more/paths", "much/more/paths")
+|> Path.dirname()
+|> Path.split()
+|> Path.join()
 ```
 
 ## Bang Functions
