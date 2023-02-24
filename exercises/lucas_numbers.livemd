@@ -117,7 +117,18 @@ defmodule Lucas do
     iex> Lucas.number(20)
     15127
   """
-  def number(n) do
+  @spec number(non_neg_integer()) :: non_neg_integer()
+  # ## Body recurssive (less performant)
+  # def number(0), do: 2
+  # def number(1), do: 1
+  # def number(n), do: number(n - 1) + number(n - 2)
+
+  ## Tail recurssive
+  def number(n), do: number(n, 2, 1)
+  def number(0, last, _previous), do: last
+
+  def number(n, last, previous) do
+    number(n - 1, previous, last + previous)
   end
 
   @doc """
@@ -140,9 +151,17 @@ defmodule Lucas do
     iex> Lucas.sequence(10)
     [2, 1, 3, 4, 7, 11, 18, 29, 47, 76]
   """
+  @spec sequence(non_neg_integer) :: [pos_integer]
+  # ## Body recurssive
+  # def sequence(length, acc \\ [])
+  # def sequence(0, acc), do: acc
+  # def sequence(length, acc), do: sequence(length - 1, [number(length - 1) | acc])
 
-  def sequence(length) do
-  end
+  ## Tail recurssive
+  def sequence(n) when n > 0, do: sequence(n, [1, 2])
+  def sequence(1, [_head | tail]), do: tail
+  def sequence(2, luc), do: Enum.reverse(luc)
+  def sequence(n, [hd | tl] = luc), do: sequence(n - 1, [hd + hd(tl) | luc])
 end
 ```
 

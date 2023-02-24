@@ -97,10 +97,12 @@ defmodule Fibonacci do
   # def of(n), do: of(n - 1) + of(n - 2)
 
   ## Tail recurssive solution (more performant)
-  def of(n), do: of(n, 0, 1)
-
+  def of(n) when n >= 0, do: of(n, 0, 1)
   def of(0, last, _previous), do: last
-  def of(n, last, previous), do: of(n - 1, last + previous, last)
+
+  def of(n, last, previous) do
+    of(n - 1, previous, last + previous)
+  end
 end
 ```
 
