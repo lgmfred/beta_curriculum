@@ -164,7 +164,7 @@
   "guards_reading": true,
   "sql_drills_exercise": false,
   "maps_mapsets_keyword_lists_reading": false,
-  "lucas_numbers_exercise": false,
+  "lucas_numbers_exercise": true,
   "mapset_product_filters_exercise": false,
   "consumable_protocol_exercise": true,
   "task_supervisor_reading": false,
@@ -202,7 +202,7 @@
   "recursion_reading": false,
   "in-memory_todo_list_exercise": false,
   "capstone_project_guide_reading": false,
-  "fibonacci_exercise": false,
+  "fibonacci_exercise": true,
   "typespec_drills_exercise": true,
   "custom_assertions_exercise": false,
   "atoms_reading": true
