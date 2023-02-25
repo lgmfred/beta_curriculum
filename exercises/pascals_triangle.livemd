@@ -122,11 +122,32 @@ defmodule Pascal do
       iex> Pascal.of(1)
       [[1]]
 
+      iex> Pascal.of(2)
+      [[1], [1, 1]]
+
+      iex> Pascal.of(3)
+      [[1], [1, 1], [1, 2, 1]]
+
+      iex> Pascal.of(4)
+      [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1]]
+
       iex> Pascal.of(5)
       [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]
 
   """
-  def of(n) do
+  @spec of(pos_integer()) :: [list()]
+
+  def of(n) when n >= 1, do: of(n, [[1]])
+
+  defp of(1, acc), do: Enum.reverse(acc)
+
+  defp of(n, [head | _tail] = sofar) do
+    middle_elems =
+      Enum.chunk_every(head, 2, 1, :discard)
+      |> Enum.map(fn [int1, int2] -> int1 + int2 end)
+
+    new_elem = [1] ++ middle_elems ++ [1]
+    of(n - 1, [new_elem | sofar])
   end
 end
 ```

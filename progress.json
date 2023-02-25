@@ -40,7 +40,7 @@
   "phoenix_1.6_reading": false,
   "streams_reading": false,
   "home_page_exercise": false,
-  "pascals_triangle_exercise": false,
+  "pascals_triangle_exercise": true,
   "book_search_book_content_reading": false,
   "portfolio_exercise": false,
   "non_enumerables_reading": true,
