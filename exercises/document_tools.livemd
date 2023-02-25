@@ -84,8 +84,22 @@ defmodule Document do
       iex> Document.word_count("word_count.txt")
       3
   """
+  @spec word_count(String.t()) :: non_neg_integer()
   def word_count(file_name) do
+    File.stream!(file_name)
+    |> Stream.map(fn line ->
+      String.split(line, " ", trim: true) |> Enum.count()
+    end)
+    |> Enum.sum()
   end
+
+  # ## My original unoptimised solution
+  # def word_count(file_name) do
+  #   {:ok, file} = File.read(file_name)
+
+  #   String.split(file)
+  #   |> Enum.count()
+  # end
 
   @doc ~S"""
   Count the number of words in a document.
@@ -96,8 +110,28 @@ defmodule Document do
       iex> Document.line_count("line_count.txt")
       3
   """
+  @spec line_count(String.t()) :: non_neg_integer()
   def line_count(file_name) do
+    file = File.open!(file_name)
+    count = count_lines(file)
+    File.close(file)
+    count
   end
+
+  defp count_lines(file, count \\ 0) do
+    case IO.read(file, :line) do
+      :eof -> count
+      _any -> count_lines(file, count + 1)
+    end
+  end
+
+  # ## My original unoptimised solution
+  # def line_count(file_name) do
+  #   {:ok, file} = File.read(file_name)
+
+  #   String.split(file, "\n", trim: true)
+  #   |> Enum.count()
+  # end
 
   @doc ~S"""
   Add line numbers formatted as "X. rest of line" to an existing file.
@@ -110,7 +144,26 @@ defmodule Document do
       "1. one\n2. two\n3. three"
   """
   def add_line_numbers(file_name) do
+    file_with_lines =
+      File.stream!(file_name)
+      |> Stream.with_index(1)
+      |> Stream.map(fn {line, number} -> "#{number}. #{line}" end)
+      |> Enum.join()
+
+    File.write(file_name, file_with_lines)
   end
+
+  # ## My original unoptimised solution
+  # def add_line_numbers(file_name) do
+  #   {:ok, file} = File.read(file_name)
+
+  #   with_line_numbers =
+  #     String.split(file, "\n", trim: true)
+  #     |> Enum.with_index(fn element, index -> "#{index + 1}. #{element}\n" end)
+  #     |> Enum.join()
+
+  #   File.write(file_name, with_line_numbers)
+  # end
 end
 ```
 
