@@ -54,6 +54,8 @@ defmodule TodoList do
   @moduledoc """
   Documentation for `TodoList`
   """
+  @todo_file "todo.txt"
+
   @doc """
   Retrieve the persistent todo list.
 
@@ -63,6 +65,13 @@ defmodule TodoList do
       []
   """
   def list do
+    case File.read(@todo_file) do
+      {:ok, binary} ->
+        :erlang.binary_to_term(binary)
+
+      _any ->
+        []
+    end
   end
 
   @doc """
@@ -75,26 +84,50 @@ defmodule TodoList do
       ["finish homework"]
       
       iex> TodoList.add("task 1")
+      iex> TodoList.list()
+      ["task 1", "finish homework"]
+
       iex> TodoList.add("task 2")
       iex> TodoList.list()
-      ["task 2", "task 1"]
+      ["task 2", "task 1", "finish homework"]
   """
   def add(item) do
+    updated =
+      [item | list()]
+      |> :erlang.term_to_binary()
+
+    File.write(@todo_file, updated)
   end
 
   @doc """
-  Complete (remove) and item from the persistent todo list.
+  Complete (remove) an item from the persistent todo list.
 
   ## Examples
 
-      iex> TodoList.add("finish homework")
       iex> TodoList.complete("finish homework")
+      iex> TodoList.list()
+      ["task 2", "task 1"]
+
+      iex> TodoList.complete("task 1")
+      iex> TodoList.list()
+      ["task 2"]
+
+      iex> TodoList.complete("task 2")
       iex> TodoList.list()
       []
   """
   def complete(item) do
+    updated =
+      list()
+      |> List.delete(item)
+      |> :erlang.term_to_binary()
+
+    File.write(@todo_file, updated)
   end
 end
+
+## We delete the "todo.txt" file after every run. A dirty fix!
+File.rm("todo.txt")
 ```
 
 ## Mark As Completed
