@@ -135,7 +135,20 @@ end
 </details>
 
 ```elixir
+defmodule Journal do
+  use GenServer
 
+  @impl true
+  def init(_opts) do
+    {:ok, []}
+  end
+
+  @impl true
+  def handle_cast({:add_entry, note}, state) do
+    new_state = [note | state]
+    {:noreply, new_state}
+  end
+end
 ```
 
 ## Process
@@ -294,7 +307,21 @@ end
 </details>
 
 ```elixir
+defmodule DecrementingCounter do
+  def init(_opts) do
+    schedule_decrement()
+    {:ok, 0}
+  end
 
+  def handle_info(:decrement, state) do
+    schedule_decrement()
+    {:noreply, state - 1}
+  end
+
+  defp schedule_decrement do
+    Process.send_after(self(), :decrement, 500)
+  end
+end
 ```
 
 ## Further Reading
