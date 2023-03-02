@@ -20,7 +20,7 @@
   "process_drills_exercise": true,
   "saferange_exercise": true,
   "time_converting_exercise": true,
-  "pokemon_server_exercise": false,
+  "pokemon_server_exercise": true,
   "strings_reading": true,
   "counting_votes_exercise": true,
   "metric_conversion_exercise": true,
