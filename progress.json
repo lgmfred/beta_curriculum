@@ -62,7 +62,7 @@
   "group_project_blog_exercise": false,
   "treasure_matching_exercise": true,
   "github_engineering_journal_exercise": false,
-  "mailbox_server_exercise": false,
+  "mailbox_server_exercise": true,
   "blog_posts_exercise": false,
   "git_reading": true,
   "named_number_lists_exercise": true,
