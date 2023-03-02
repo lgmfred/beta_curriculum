@@ -154,7 +154,7 @@
   "spoonacular_recipe_api_exercise": false,
   "book_changeset_exercise": false,
   "weighted_voting_exercise": true,
-  "supervisors_reading": false,
+  "supervisors_reading": true,
   "save_game_exercise": true,
   "document_tools_exercise": true,
   "factorial_exercise": true,
