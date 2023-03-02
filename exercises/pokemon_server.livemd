@@ -155,6 +155,20 @@ defmodule Pokemon do
     iex> %Pokemon{name: "Charmander", type: :fire}
     %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5}
   """
+  @enforce_keys [:name, :type]
+  defstruct @enforce_keys ++ [health: 20, attack: 5]
+
+  @opaque type :: :grass | :water | :fire
+
+  @type pokemon :: %Pokemon{
+          name: String.t(),
+          type: type(),
+          health: non_neg_integer,
+          attack: non_neg_integer
+        }
+
+  @advantage [{:fire, :grass}, {:grass, :water}, {:water, :fire}]
+
   use GenServer
 
   @doc """
@@ -162,8 +176,12 @@ defmodule Pokemon do
 
   ## Examples
       iex> {:ok, pokemon} = Pokemon.start_link([pokemon: %Pokemon{name: "Charmander", type: :fire}])
+      iex> Process.alive?(pokemon)
+      true
   """
+  @spec start_link([{:pokemon, pokemon}]) :: {:ok, pid}
   def start_link(opts \\ []) do
+    GenServer.start_link(__MODULE__, opts)
   end
 
   @doc """
@@ -206,7 +224,43 @@ defmodule Pokemon do
       iex> Pokemon.attack(attacker, defender)
       %Pokemon{name: "Bulbasaur2", type: :grass, health: 25, attack: 5}
   """
+  @spec attack(pid, pid) :: pokemon
   def attack(attacker, defender) do
+    damage = Pokemon.get_value(attacker, :attack)
+    factor = factor(attacker, defender)
+    GenServer.call(defender, {:apply_damage, damage * factor})
+  end
+
+  @spec factor(pid, pid) :: number
+  def factor(attacker, defender) do
+    attacker_type = Pokemon.get_value(attacker, :type)
+    defender_type = Pokemon.get_value(defender, :type)
+
+    cond do
+      attacker_type == defender_type -> 1
+      {attacker_type, defender_type} in @advantage -> 2
+      {defender_type, attacker_type} in @advantage -> 0.5
+    end
+  end
+
+  @spec get_value(pokemon, atom) :: non_neg_integer | type | String.t()
+  def get_value(pokemon_pid, key) do
+    GenServer.call(pokemon_pid, {:get, key})
+  end
+
+  @impl true
+  def init(opts) do
+    {:ok, Keyword.fetch!(opts, :pokemon)}
+  end
+
+  @impl true
+  def handle_call({:get, key}, _from, pokemon) do
+    {:reply, Map.get(pokemon, key), pokemon}
+  end
+
+  def handle_call({:apply_damage, amount}, _from, pokemon) do
+    updated_pokemon = Map.update!(pokemon, :health, fn health -> max(0, health - amount) end)
+    {:reply, updated_pokemon, updated_pokemon}
   end
 end
 ```
