@@ -76,37 +76,60 @@ end
 Implement the `Timer` module as documented below. You will also have to implement the necessary [GenServer](https://hexdocs.pm/elixir/GenServer.html) callback functions such as [GenServer.init/1](https://hexdocs.pm/elixir/GenServer.html#init/1), [GenServer.handle_info/2](https://hexdocs.pm/elixir/GenServer.html#handle_info/2), and [GenServer.handle_call/3](https://hexdocs.pm/elixir/GenServer.html#handle_call/3).
 
 ```elixir
- defmodule Timer do
-   @moduledoc """
-   Documentation for `Timer`
-   """
-   use GenServer
+defmodule Timer do
+  @moduledoc """
+  Documentation for `Timer`
+  """
+  use GenServer
 
-   @doc """
-   Start the `Timer` process.
+  @doc """
+  Start the `Timer` process.
 
-   ## Examples
+  ## Examples
 
-       iex> {:ok, pid} = Timer.start_link([])
-   """
-   def start_link(_opts) do
-   end
+      iex> {:ok, _pid} = Timer.start_link([])
+  """
+  def start_link(_default) do
+    GenServer.start_link(__MODULE__, 0)
+  end
 
-   @doc """
-   Get the number of seconds that have elapsed since the `Timer` was started.
+  @doc """
+  Get the number of seconds that have elapsed since the `Timer` was started.
 
-   ## Examples
+  ## Examples
 
-     iex> {:ok, pid} = Timer.start_link([])
-     iex> Timer.seconds(pid)
-     0
-     iex> Process.sleep(1200)
-     iex> Timer.seconds(pid)
-     1
-   """
-   def seconds(timer_pid) do
-   end
- end
+    iex> {:ok, pid} = Timer.start_link([])
+    iex> Timer.seconds(pid)
+    0
+    iex> Process.sleep(1200)
+    iex> Timer.seconds(pid)
+    1
+  """
+  def seconds(timer_pid) do
+    GenServer.call(timer_pid, :elapsed_time)
+  end
+
+  defp schedule() do
+    :timer.send_after(1000, :increment)
+  end
+
+  @impl true
+  def init(default) do
+    schedule()
+    {:ok, default}
+  end
+
+  @impl true
+  def handle_call(:elapsed_time, _from, state) do
+    {:reply, state, state}
+  end
+
+  @impl true
+  def handle_info(:increment, state) do
+    schedule()
+    {:noreply, state + 1}
+  end
+end
 ```
 
 ## Bonus :timer
@@ -149,7 +172,7 @@ end
 </details>
 
 ```elixir
-defmodule AlternateTimer do
+defmodule Timerr do
   @moduledoc """
   Documentation for `Timer`
   """
@@ -157,16 +180,50 @@ defmodule AlternateTimer do
 
   @doc """
   Start the `Timer` process.
+
+  ## Examples
+
+      iex> {:ok, _pid} = Timer.start_link([])
   """
-  def start_link(_opts) do
-    GenServer.start_link(__MODULE__, [])
+  def start_link(_default) do
+    GenServer.start_link(__MODULE__, 0)
   end
 
   @doc """
   Get the number of seconds that have elapsed since the `Timer` was started.
+
+  ## Examples
+
+    iex> {:ok, pid} = Timer.start_link([])
+    iex> Timer.seconds(pid)
+    0
+    iex> Process.sleep(1200)
+    iex> Timer.seconds(pid)
+    1
   """
   def seconds(timer_pid) do
-    GenServer.call(timer_pid, :seconds)
+    GenServer.call(timer_pid, :elapsed_time)
+  end
+
+  defp schedule() do
+    Process.send_after(self(), :increment, 1000)
+  end
+
+  @impl true
+  def init(default) do
+    schedule()
+    {:ok, default}
+  end
+
+  @impl true
+  def handle_call(:elapsed_time, _from, state) do
+    {:reply, state, state}
+  end
+
+  @impl true
+  def handle_info(:increment, state) do
+    schedule()
+    {:noreply, state + 1}
   end
 end
 ```
