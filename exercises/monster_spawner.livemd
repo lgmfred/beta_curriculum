@@ -5,7 +5,7 @@ Mix.install([
   {:jason, "~> 1.4"},
   {:kino, "~> 0.8.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
-  {:hidden_cell, github: "brooklinjazz/hidden_cell"},
+  {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
 ```
 
@@ -110,10 +110,13 @@ defmodule Monster do
   ## Examples
 
       iex> {:ok, pid} = Monster.start_link([])
+      iex> Process.alive?(pid)
+      true
   """
   def start_link(opts) do
     # IO.inspect/2 to observe when a `Monster` process starts.
     IO.inspect(opts, label: "Monster Started")
+    GenServer.start_link(__MODULE__, opts, name: opts[:name])
   end
 
   @doc """
@@ -129,6 +132,7 @@ defmodule Monster do
       %{health: 70}
   """
   def attack(monster_pid, amount) do
+    GenServer.cast(monster_pid, {:attack, amount})
   end
 
   @doc """
@@ -141,6 +145,7 @@ defmodule Monster do
       100
   """
   def health(monster_pid) do
+    GenServer.call(monster_pid, :health)
   end
 
   @doc """
@@ -155,6 +160,7 @@ defmodule Monster do
   """
   @impl true
   def init(_opts) do
+    {:ok, %{health: 100}}
   end
 
   @doc """
@@ -175,6 +181,13 @@ defmodule Monster do
   """
   @impl true
   def handle_cast({:attack, damage}, state) do
+    new_health = state.health - damage
+
+    if new_health > 0 do
+      {:noreply, %{state | health: new_health}}
+    else
+      raise "dying!"
+    end
   end
 
   @doc """
@@ -188,6 +201,7 @@ defmodule Monster do
   """
   @impl true
   def handle_call(:health, _from, state) do
+    {:reply, state.health, state}
   end
 end
 ```
@@ -241,7 +255,16 @@ Supervisor.start_link(children, strategy: :one_for_one)
 Enter your solution below.
 
 ```elixir
+child_specs =
+  for name <- [:monster1, :monster2, :monster3] do
+    %{id: name, start: {Monster, :start_link, [[name: name]]}}
+  end
 
+{:ok, sup_pid} = Supervisor.start_link(child_specs, strategy: :one_for_one)
+```
+
+```elixir
+Supervisor.which_children(sup_pid)
 ```
 
 Call `Monster.attack/1` on your monster processes to ensure they are restarted.
@@ -257,7 +280,7 @@ Monster.attack(:monster1, 110)
 </details>
 
 ```elixir
-
+Monster.attack(:monster2, 110)
 ```
 
 ## Bonus: Hero
@@ -298,7 +321,31 @@ end
 </details>
 
 ```elixir
+defmodule Hero do
+  def start_link(opts) do
+    GenServer.start_link(__MODULE__, [], opts)
+  end
 
+  def init(_opts) do
+    schedule_attack()
+    {:ok, []}
+  end
+
+  defp schedule_attack() do
+    :timer.send_after(1000, :attack_monsters)
+  end
+
+  def handle_info(:attack_monsters, state) do
+    Supervisor.which_children(:super_sup)
+    |> Enum.each(fn
+      {_name, pid, :worker, [Monster]} -> Monster.attack(pid, Enum.random(1..10))
+      _ -> :ok
+    end)
+
+    schedule_attack()
+    {:noreply, state}
+  end
+end
 ```
 
 Start the `Hero` process with three other `Monster` processes in the same supervisor. Make the supervisor a named supervisor so you can find all of its child processes with [Supervisor.which_children/1](https://hexdocs.pm/elixir/Supervisor.html#which_children/1).
@@ -332,7 +379,17 @@ children = [
 </details>
 
 ```elixir
+monster_specs =
+  for name <- [:monster7, :monster8, :monster9] do
+    %{id: name, start: {Monster, :start_link, [[name: name]]}}
+  end
 
+hero_specs = [%{id: :hero1, start: {Hero, :start_link, [[name: :lgmfred]]}}]
+
+super_sup_child_specs = monster_specs ++ hero_specs
+
+{:ok, super_sup_pid} =
+  Supervisor.start_link(super_sup_child_specs, strategy: :one_for_one, name: :super_sup)
 ```
 
 Use [Kino.Process.sup_tree/2](https://hexdocs.pm/kino/Kino.Process.html#sup_tree/2) to visualize the processes under your named supervisor.
@@ -347,7 +404,7 @@ Kino.Process.sup_tree(supervisor)
 </details>
 
 ```elixir
-
+Kino.Process.sup_tree(:super_sup)
 ```
 
 For improved observability, create a function that will print the health value for each `Monster` process under the named supervisor.
@@ -366,7 +423,11 @@ end)
 </details>
 
 ```elixir
-
+Supervisor.which_children(:super_sup)
+|> Enum.each(fn
+  {_name, pid, :worker, [Monster]} -> IO.puts(Monster.health(pid))
+  _ -> :ok
+end)
 ```
 
 ## Mark As Completed
