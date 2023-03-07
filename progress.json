@@ -125,7 +125,7 @@
   "traffic_light_server_exercise": true,
   "supervisor_and_genserver_drills_exercise": false,
   "computer_hardware_reading": false,
-  "supervised_stack_exercise": false,
+  "supervised_stack_exercise": true,
   "naming_numbers_exercise": true,
   "deployment_exercise": false,
   "typespecs_reading": true,
