@@ -138,7 +138,25 @@ defmodule WebServer do
 
     # send response
     current_time = Time.to_string(Time.utc_now())
-    response = "HTTP/1.1 200\r\nContent-Type: text/html\r\n\r\n It is #{current_time}"
+
+    body = """
+    <!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Dump Time Server</title>
+    </head>
+    <body>
+    <h1>Il est #{current_time} TU<h1/>
+    </body>
+    </html>
+    """
+
+    # response = "HTTP/1.1 200\r\nContent-Type: text/html\r\n\r\n It is #{current_time}"
+    # response = "HTTP/1.1 200\r\nContent-Type: text/html\r\n\r\n <h1>It is #{current_time}<h1/>"
+    response = "HTTP/1.1 200\r\nContent-Type: text/html\r\n\r\n #{body}"
+
     :gen_tcp.send(connection, response)
 
     # close connection
