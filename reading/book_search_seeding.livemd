@@ -719,7 +719,8 @@ Faker.Lorem.sentence()
 We can also specify a certain number of words for our sentence.
 
 ```elixir
-Faker.Lorem.sentence(10)
+Faker.Lorem.sentence(100)
+|> IO.puts()
 ```
 
 ### Create A New Seed File

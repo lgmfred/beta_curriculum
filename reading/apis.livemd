@@ -5,7 +5,7 @@ Mix.install([
   {:jason, "~> 1.4"},
   {:kino, "~> 0.8.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
-  {:hidden_cell, github: "brooklinjazz/hidden_cell"},
+  # {:hidden_cell, github: "brooklinjazz/hidden_cell"},
   {:httpoison, "~> 1.8"},
   {:poison, "~> 5.0"}
 ])
@@ -224,6 +224,8 @@ Now we could use this response in our program.
 
 ```elixir
 IO.puts("""
+#{response["category"]}
+
 #{response["setup"]}
 
 #{response["delivery"]}
@@ -236,6 +238,7 @@ Use [Jason.decode!/2](https://hexdocs.pm/jason/Jason.html#encode!/2) to decode t
 
 ```elixir
 json = "{\"hello\"\: \"world\"}"
+Jason.decode!(json)
 ```
 
 ## Poison
@@ -310,12 +313,13 @@ Create a free account on the [Open Weather API](https://openweathermap.org/) and
 Use your API key and valid latitude/longitude coordinates to make a successful request to their API. Ensure the `:status_code` is `200` rather than `401`.
 
 ```elixir
-lat = 35
-lon = 139
+lat = 0.324155
+lon = 32.5949066
 api_key = ""
 
 {:ok, response} =
   HTTPoison.get(
+    # "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=#{api_key}"
     "https://api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{lon}&appid=#{api_key}"
   )
 ```
@@ -323,7 +327,7 @@ api_key = ""
 Once you are sure the above works correctly, use [Poison.decode/2](https://hexdocs.pm/poison/Poison.html#decode/2) to decode the `response` into an Elixir map.
 
 ```elixir
-response
+Jason.decode!(response.body)
 ```
 
 ## Mark As Completed
